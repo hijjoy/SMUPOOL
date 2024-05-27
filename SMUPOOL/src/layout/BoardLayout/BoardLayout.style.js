@@ -7,6 +7,8 @@ const Container = styled.div`
 `;
 const Wrapper = styled.div`
   flex: 1;
+
+  height: 93%;
 `;
 
 export { Container, Wrapper };

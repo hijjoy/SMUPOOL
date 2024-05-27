@@ -2,7 +2,7 @@ const COLOR = {
   MAIN: "#186DEC",
   BLUE: "#74A6D3",
   GRAY: "#E8EAEC",
-  DARK_BLUE: "2D415F",
+  DARK_BLUE: "#2D415F",
 };
 
 const ALIGN = {
