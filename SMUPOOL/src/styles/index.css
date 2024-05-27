@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "SCDream";
+}
+
+@font-face {
+  font-family: "SCDream";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/fonts/SCDream4.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../assets/fonts/SCDream5.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../assets/fonts/SCDream7.otf") format("opentype");
+}
