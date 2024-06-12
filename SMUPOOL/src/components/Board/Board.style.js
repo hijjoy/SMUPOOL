@@ -93,22 +93,33 @@ const Button = styled.button`
   svg {
     margin-left: 7px;
   }
+
+  &:hover {
+    background-color: #1665db;
+  }
 `;
 
 const PageButton = styled.div`
   ${theme.ALIGN.ROW_SPACE_BETWEEN};
   width: 60px;
   svg {
-    cursor: pointer;
     width: 20px;
     height: 20px;
     margin-bottom: 2px;
+
+    &:hover {
+      transform: scale(0.95);
+    }
   }
 
   button {
     ${theme.ALIGN.ROW_CENTER};
     border: none;
     background-color: transparent;
+    cursor: pointer;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 `;
 export { Container, Attributes, Wrapper, Number, PostWrapper, FootWrapper, Search, Button, PageButton };

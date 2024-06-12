@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
-const SubmitButton = ({ text }) => {
-  return <Button>{text}</Button>;
+const SubmitButton = ({ text, onClick }) => {
+  return <Button onClick={onClick}>{text}</Button>;
 };
 
 export default SubmitButton;

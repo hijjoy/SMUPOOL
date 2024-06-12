@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as S from "./CreatePage.style";
 import { CiLock } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import SubmitButton from "../../../components/SubmitButton/index";
 
 const CreatePage = () => {
   const nav = useNavigate();
@@ -38,8 +39,6 @@ const CreatePage = () => {
     }
   };
 
-  console.log(userInput);
-
   return (
     <S.Container onSubmit={(e) => e.preventDefault()}>
       <S.TitleInput type="text" name="title" value={title} onChange={handleChange} placeholder="제목 입력" />
@@ -68,7 +67,7 @@ const CreatePage = () => {
           </S.Lockbox>
 
           <S.BtnBox>
-            <button onClick={handleSubmit}>작성</button>
+            <SubmitButton text="작성" onClick={handleSubmit} />
           </S.BtnBox>
         </S.SubmitWrapper>
       </S.Wrapper>
