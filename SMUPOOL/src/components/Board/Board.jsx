@@ -13,6 +13,7 @@ const pinData = [
     author: "hijjoy",
     date: "2024-05-27",
     see: 5,
+    lock: false,
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const pinData = [
     author: "hijjoy",
     date: "2024-05-27",
     see: 4,
+    lock: false,
   },
 ];
 
@@ -30,27 +32,31 @@ const data = [
     author: "hijjoy",
     date: "2024-05-27",
     see: 4,
+    lock: false,
   },
   {
     id: 2,
-    title: "wpaddhr",
+    title: "wpaddhrwpaddhrwpaddhrwpaddhr",
     author: "hijjoy",
     date: "2024-05-27",
     see: 7,
+    lock: false,
   },
   {
     id: 3,
-    title: "wpaddhr",
+    title: "wpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhr",
     author: "hijjoy",
     date: "2024-05-27",
     see: 4,
+    lock: false,
   },
   {
     id: 4,
-    title: "wpaddhr",
-    author: "hijjoy",
+    title: "급한 질문입니다 !",
+    author: "si",
     date: "2024-05-27",
     see: 4,
+    lock: true,
   },
   {
     id: 5,
@@ -58,6 +64,7 @@ const data = [
     author: "hijjoy",
     date: "2024-05-27",
     see: 4,
+    lock: false,
   },
   {
     id: 7,
@@ -65,6 +72,7 @@ const data = [
     author: "hijjoy",
     date: "2024-05-27",
     see: 4,
+    lock: false,
   },
 ];
 
@@ -83,13 +91,18 @@ const Board = () => {
           <p>조회수</p>
         </S.Wrapper>
       </S.Attributes>
+
       <S.PostWrapper>
         {pinData.map((e) => (
           <Post post={e} key={e.id} pin={true} />
         ))}
-        {data.reverse().map((e) => (
-          <Post post={e} key={e.id} />
-        ))}
+        {data.reverse().map(
+          (
+            e, // reverse 일단 데이터에 따라 이후 수정
+          ) => (
+            <Post post={e} key={e.id} />
+          ),
+        )}
       </S.PostWrapper>
 
       <S.FootWrapper>
@@ -98,8 +111,13 @@ const Board = () => {
           <IoSearchSharp />
         </S.Search>
         <S.PageButton>
-          <IoIosArrowBack />
-          {currentPage} <IoIosArrowForward onClick={() => setCurrentPage((prev) => prev + 1)} />
+          <button onClick={() => setCurrentPage((prev) => prev - 1)} disabled={currentPage === 1}>
+            <IoIosArrowBack />
+          </button>
+          {currentPage}
+          <button onClick={() => setCurrentPage((prev) => prev + 1)}>
+            <IoIosArrowForward />
+          </button>
         </S.PageButton>
         <S.Button onClick={() => nav("/board/create")}>
           글쓰기

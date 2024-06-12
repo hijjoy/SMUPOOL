@@ -33,6 +33,7 @@ const Wrapper = styled.div`
   span {
     ${theme.ALIGN.ROW_CENTER};
     width: 30%;
+    margin-left: 14px;
   }
 
   p {
@@ -56,9 +57,9 @@ const Search = styled.div`
   padding: 0 10px;
   ${theme.ALIGN.ROW_SPACE_BETWEEN};
 
-  border: 1.5px solid ${theme.COLOR.DARK_BLUE};
-  border-radius: 10px;
-  width: 22%;
+  border: 1px solid ${theme.COLOR.DARK_BLUE};
+  border-radius: 5px;
+  width: 24%;
   height: 35px;
   margin-left: 10px;
 
@@ -77,9 +78,10 @@ const Button = styled.button`
   cursor: pointer;
   background-color: ${theme.COLOR.MAIN};
   border: none;
+  border-radius: 5px;
   color: #fff;
   font-weight: 700;
-  width: 90px;
+  width: 100px;
   height: 35px;
   ${theme.ALIGN.ROW_CENTER};
   margin-left: 130px;
@@ -97,6 +99,12 @@ const PageButton = styled.div`
     width: 20px;
     height: 20px;
     margin-bottom: 2px;
+  }
+
+  button {
+    ${theme.ALIGN.ROW_CENTER};
+    border: none;
+    background-color: transparent;
   }
 `;
 export { Container, Attributes, Wrapper, Number, PostWrapper, FootWrapper, Search, Button, PageButton };

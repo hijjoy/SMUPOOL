@@ -13,6 +13,7 @@ const No = styled.div`
   width: 10%;
   ${theme.ALIGN.ROW_CENTER};
   padding-right: 15px;
+  font-weight: 500;
 
   img {
     width: 20px;
@@ -21,10 +22,16 @@ const No = styled.div`
 `;
 
 const Title = styled.div`
+  display: flex;
+  align-items: center;
   padding-left: 20px;
   width: 57%;
 
-  font-weight: ${(props) => (props.$pin ? "700" : "inherit")};
+  font-weight: ${(props) => (props.$pin ? "700" : "500")};
+
+  img {
+    width: 31px;
+  }
 `;
 
 const Wrapper = styled.div`
