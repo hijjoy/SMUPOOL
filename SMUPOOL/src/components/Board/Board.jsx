@@ -44,8 +44,8 @@ const data = [
   },
   {
     id: 3,
-    title: "wpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhr",
-    author: "hijjoy",
+    title: "wpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhr",
+    author: "sd",
     date: "2024-05-27",
     see: 4,
     lock: false,

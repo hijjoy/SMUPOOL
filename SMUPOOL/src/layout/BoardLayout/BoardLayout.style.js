@@ -4,8 +4,11 @@ const Container = styled.div`
   flex-direction: column;
 
   height: 100vh;
+  width: 100vw;
 `;
 const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
   flex: 1;
 
   height: 93%;

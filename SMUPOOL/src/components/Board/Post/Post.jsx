@@ -8,7 +8,8 @@ const Post = ({ post, pin }) => {
     <S.Container $pin={pin}>
       <S.No>{pin ? <img src={Pin} /> : id}</S.No>
       <S.Title $pin={pin}>
-        {title} {lock ? <img src={Lock} /> : null}
+        <span>{title}</span>
+        {lock ? <img src={Lock} /> : null}
       </S.Title>
       <S.Wrapper>
         <div>{author}</div>

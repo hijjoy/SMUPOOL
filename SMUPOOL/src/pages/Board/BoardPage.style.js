@@ -4,6 +4,7 @@ import theme from "../../styles/theme";
 const Container = styled.div`
   ${theme.ALIGN.COLUMN_CENTER};
   height: 100%;
+  width: 100%;
 
   h1 {
     ${theme.ALIGN.ROW_CENTER};
@@ -16,6 +17,9 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
   height: 82%;
+  width: 70%;
 `;
 export { Container, Wrapper };

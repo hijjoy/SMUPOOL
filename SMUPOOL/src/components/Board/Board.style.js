@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 const Container = styled.div`
-  width: 1000px;
+  width: 100%;
 `;
 
 const Attributes = styled.div`
@@ -14,6 +14,10 @@ const Attributes = styled.div`
 
   border-top: 1px solid black;
   border-bottom: 0.5px solid black;
+
+  @media ${theme.SCREEN_SIZE.TABLET} {
+    font-size: 12px;
+  }
 `;
 
 const Number = styled.div`

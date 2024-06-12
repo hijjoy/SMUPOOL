@@ -33,6 +33,11 @@ const ALIGN = {
           `,
 };
 
-const theme = { COLOR, ALIGN };
+const SCREEN_SIZE = {
+  MOBILE: `screen and (max-width: 480px)`,
+  TABLET: "screen and (max-width: 768px)",
+};
+
+const theme = { COLOR, ALIGN, SCREEN_SIZE };
 
 export default theme;

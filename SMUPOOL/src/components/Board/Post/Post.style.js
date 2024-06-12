@@ -29,6 +29,12 @@ const Title = styled.div`
 
   font-weight: ${(props) => (props.$pin ? "700" : "500")};
 
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   img {
     width: 31px;
   }
