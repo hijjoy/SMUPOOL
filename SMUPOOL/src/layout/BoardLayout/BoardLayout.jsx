@@ -5,7 +5,7 @@ import { Navbar } from "../../components";
 const BoardLayout = () => {
   return (
     <S.Container>
-      <Navbar />
+      <Navbar text="문의 게시판" />
       <S.Wrapper>
         <Outlet />
       </S.Wrapper>
