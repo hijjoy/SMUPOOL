@@ -2,7 +2,11 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 const Container = styled.div`
-  width: 100%;
+  width: 1000px;
+
+  @media ${theme.SCREEN_SIZE.TABLET} {
+    width: 700px;
+  }
 `;
 
 const Attributes = styled.div`

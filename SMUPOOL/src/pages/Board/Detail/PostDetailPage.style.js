@@ -7,7 +7,11 @@ const Container = styled.div`
   align-items: center;
   padding-top: 80px;
   height: 100%;
-  width: 60%;
+  width: 950px;
+
+  @media ${theme.SCREEN_SIZE.TABLET} {
+    width: 680px;
+  }
 `;
 
 const Title = styled.div`
@@ -75,6 +79,10 @@ const BtnBox = styled.div`
 
     &:hover {
       color: #919191;
+    }
+
+    @media ${theme.SCREEN_SIZE.TABLET} {
+      font-size: 11px;
     }
   }
 `;

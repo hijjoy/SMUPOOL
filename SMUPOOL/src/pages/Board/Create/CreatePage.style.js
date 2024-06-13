@@ -8,7 +8,11 @@ const Container = styled.form`
   padding-top: 130px;
 
   height: 100%;
-  width: 60%;
+  width: 900px;
+
+  @media ${theme.SCREEN_SIZE.TABLET} {
+    width: 680px;
+  }
 `;
 
 const TitleInput = styled.input`

@@ -14,6 +14,8 @@ const Wrapper = styled.div`
   flex: 1;
 
   height: 93%;
+  width: 100%;
+  overflow-x: scroll;
 `;
 
 export { Container, Wrapper };

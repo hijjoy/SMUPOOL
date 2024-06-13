@@ -5,6 +5,7 @@ const Container = styled.div`
   ${theme.ALIGN.COLUMN_CENTER};
   height: 100%;
   width: 100%;
+  overflow-x: scroll;
 
   h1 {
     ${theme.ALIGN.ROW_CENTER};
@@ -21,6 +22,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   height: 82%;
-  width: 70%;
+  width: 100%;
 `;
 export { Container, Wrapper };
