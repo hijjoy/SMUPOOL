@@ -4,7 +4,7 @@ import theme from "../../../styles/theme";
 const Container = styled.div`
   ${theme.ALIGN.ROW_SPACE_BETWEEN};
   width: 100%;
-  height: 51px;
+  height: 48px;
   border-bottom: 0.5px solid black;
   background-color: ${(props) => (props.$pin ? "#E0F0FF" : "inherit")};
 `;
@@ -22,12 +22,14 @@ const No = styled.div`
 `;
 
 const Title = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   padding-left: 20px;
   width: 57%;
 
   font-weight: ${(props) => (props.$pin ? "700" : "500")};
+  font-size: 15px;
 
   span {
     white-space: nowrap;
@@ -44,15 +46,16 @@ const Wrapper = styled.div`
   ${theme.ALIGN.ROW_SPACE_AROUND};
   width: 33%;
   opacity: 0.5;
+  font-size: 14px;
 
   div {
     ${theme.ALIGN.ROW_CENTER};
-    width: 30%;
+    width: 35%;
   }
 
   span {
     ${theme.ALIGN.ROW_CENTER};
-    width: 35%;
+    width: 30%;
   }
 
   p {

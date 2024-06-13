@@ -1,5 +1,5 @@
 import { AppLayout, BoardLayout } from "../layout";
-import { MainPage, LoginPage, SignupPage, BoardPage, PostDetail, MypagePage, CreatePage } from "../pages";
+import { MainPage, LoginPage, SignupPage, BoardPage, PostDetailPage, MypagePage, CreatePage } from "../pages";
 
 const Router = [
   {
@@ -31,7 +31,7 @@ const Router = [
       },
       {
         path: ":id",
-        element: <PostDetail />,
+        element: <PostDetailPage />,
       },
       {
         path: "create",

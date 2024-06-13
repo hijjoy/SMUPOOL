@@ -29,7 +29,7 @@ const data = [
   {
     id: 1,
     title: "wpahr",
-    author: "hijjoy",
+    author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
     lock: false,
@@ -37,7 +37,7 @@ const data = [
   {
     id: 2,
     title: "wpaddhrwpaddhrwpaddhrwpaddhr",
-    author: "hijjoy",
+    author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 7,
     lock: false,
@@ -45,7 +45,7 @@ const data = [
   {
     id: 3,
     title: "wpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhr",
-    author: "sd",
+    author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
     lock: false,
@@ -53,7 +53,7 @@ const data = [
   {
     id: 4,
     title: "급한 질문입니다 !",
-    author: "si",
+    author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
     lock: true,
@@ -61,15 +61,23 @@ const data = [
   {
     id: 5,
     title: "wpaddhr",
-    author: "hijjoy",
+    author: "202110900 ㅂㅇㄱ",
+    date: "2024-05-27",
+    see: 4,
+    lock: false,
+  },
+  {
+    id: 6,
+    title: "wpaddhr",
+    author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
     lock: false,
   },
   {
     id: 7,
-    title: "wpaddhr",
-    author: "hijjoy",
+    title: "냠냠",
+    author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
     lock: false,
@@ -96,11 +104,12 @@ const Board = () => {
         {pinData.map((e) => (
           <Post post={e} key={e.id} pin={true} />
         ))}
-        {data.reverse().map(
+        {data.map(
           (
-            e, // reverse 일단 데이터에 따라 이후 수정
+            e,
+            idx, // reverse 일단 데이터에 따라 이후 수정
           ) => (
-            <Post post={e} key={e.id} />
+            <Post post={e} key={e.id} idx={idx + 1} />
           ),
         )}
       </S.PostWrapper>

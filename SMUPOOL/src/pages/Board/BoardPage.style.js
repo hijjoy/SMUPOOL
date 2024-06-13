@@ -8,10 +8,11 @@ const Container = styled.div`
 
   h1 {
     ${theme.ALIGN.ROW_CENTER};
-    padding-top: 50px;
+    padding: 65px 0 25px;
+
     font-weight: 700;
     font-size: 30px;
-    ${theme.COLOR.DARK_BLUE};
+    color: ${theme.COLOR.DARK_BLUE};
     height: 18%;
   }
 `;

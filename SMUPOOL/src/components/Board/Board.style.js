@@ -7,7 +7,7 @@ const Container = styled.div`
 
 const Attributes = styled.div`
   width: 100%;
-  height: 51px;
+  height: 48px;
   ${theme.ALIGN.ROW_SPACE_BETWEEN};
   font-size: 15px;
   font-weight: 700;
@@ -31,13 +31,14 @@ const Wrapper = styled.div`
 
   div {
     ${theme.ALIGN.ROW_CENTER};
-    width: 30%;
+    width: 35%;
+    padding-left: 5px;
   }
 
   span {
     ${theme.ALIGN.ROW_CENTER};
     width: 30%;
-    margin-left: 14px;
+    padding-left: 14px;
   }
 
   p {
@@ -88,7 +89,7 @@ const Button = styled.button`
   width: 100px;
   height: 35px;
   ${theme.ALIGN.ROW_CENTER};
-  margin-left: 130px;
+  margin-left: 16%;
 
   svg {
     margin-left: 7px;

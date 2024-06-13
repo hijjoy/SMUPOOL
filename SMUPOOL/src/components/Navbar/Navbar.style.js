@@ -4,7 +4,7 @@ import theme from "../../styles/theme";
 const Container = styled.div`
   ${theme.ALIGN.ROW_SPACE_BETWEEN};
   width: 100%;
-  height: 7%;
+  height: 55px;
   background-color: #cde7ff;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;

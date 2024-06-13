@@ -3,12 +3,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 100vw;
 `;
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   flex: 1;
 
   height: 93%;
