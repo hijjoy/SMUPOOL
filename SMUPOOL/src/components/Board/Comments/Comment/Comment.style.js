@@ -20,30 +20,28 @@ const CommentBox = styled.div`
   flex-direction: column;
   padding: 20px;
   width: 100%;
-  height: 120px;
+  height: 100%;
 
   h5 {
     font-size: 17px;
     font-weight: 500;
-    padding-bottom: 10px;
+    padding-bottom: 13px;
+    color: ${theme.COLOR.DARK_BLUE};
   }
 
-  span {
-    font-size: 15px;
-  }
-
-  div > p {
-    color: #a7a7a7;
+  div {
     font-size: 13px;
+    width: 100%;
   }
 `;
 
 const ChildrenCommentWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  padding: 15px 20px;
+  padding: 17px;
   width: 90%;
-  height: 110px;
+  height: 100%;
   margin-left: 10%;
   margin-bottom: 10px;
   background-color: #f8f8f8;
@@ -52,7 +50,7 @@ const ChildrenCommentWrapper = styled.div`
     opacity: 0.5;
     font-weight: 400;
     font-size: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
     svg {
       margin-right: 10px;
     }
@@ -60,17 +58,22 @@ const ChildrenCommentWrapper = styled.div`
 
   span {
     margin-left: 25px;
-    font-size: 15px;
+    font-size: 13px;
+    padding-bottom: 25px;
+    padding-right: 20px;
   }
 
-  div > p {
-    margin-left: 25px;
+  p {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
     color: #a7a7a7;
-    font-size: 13px;
+    font-size: 12px;
   }
 `;
 
 const ChildrenInputWrapper = styled(ChildrenCommentWrapper)`
+  display: ${(props) => (props.$open ? "block" : "none")};
   padding: 25px 20px;
   div {
     display: flex;
@@ -102,4 +105,32 @@ const ChildrenInputWrapper = styled(ChildrenCommentWrapper)`
   }
 `;
 
-export { CommentBox, ChildrenInputWrapper, ChildrenCommentWrapper, Container };
+const CommentBtn = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 23px;
+
+  button {
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
+    color: #a7a7a7;
+    text-decoration: underline;
+    font-size: 13px;
+
+    &:hover {
+      color: #8c8c8c;
+    }
+  }
+
+  p {
+    color: #a7a7a7;
+    font-size: 12px;
+  }
+`;
+
+const CComent = styled.div`
+  display: ${(props) => (props.$open ? "block" : "none")};
+`;
+
+export { CommentBox, ChildrenInputWrapper, ChildrenCommentWrapper, Container, CommentBtn, CComent };

@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   ${theme.ALIGN.ROW_SPACE_AROUND};
   width: 33%;
   opacity: 0.5;
-  font-size: 14px;
+  font-size: 13px;
 
   div {
     ${theme.ALIGN.ROW_CENTER};
