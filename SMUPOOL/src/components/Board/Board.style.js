@@ -53,7 +53,10 @@ const Wrapper = styled.div`
 `;
 
 const PostWrapper = styled.div`
-  ${theme.ALIGN.COLUMN_CENTER};
+  display: flex;
+  flex-direction: column;
+
+  height: calc(48px * 9);
 `;
 
 const FootWrapper = styled.div`
