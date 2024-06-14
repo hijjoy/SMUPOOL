@@ -5,6 +5,7 @@
 
 body {
   font-family: "SCDream";
+  overflow-x: hidden;
 }
 
 @font-face {

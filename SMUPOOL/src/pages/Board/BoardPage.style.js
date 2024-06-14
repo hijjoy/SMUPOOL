@@ -5,7 +5,7 @@ const Container = styled.div`
   ${theme.ALIGN.COLUMN_CENTER};
   height: 100%;
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   h1 {
     ${theme.ALIGN.ROW_CENTER};

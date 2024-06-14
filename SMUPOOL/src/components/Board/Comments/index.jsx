@@ -1,7 +1,7 @@
 import * as S from "./Comments.style";
 import Input from "../Input";
 import { CiLock } from "react-icons/ci";
-import { MdOutlineSubdirectoryArrowRight } from "react-icons/md";
+import Comment from "./Comment";
 
 const Comments = () => {
   const comments = [
@@ -33,61 +33,11 @@ const Comments = () => {
           {comments.length === 0 ? (
             <h1>아직 댓글이 없습니다.</h1>
           ) : (
-            <>
-              <S.CommentsContainer>
-                {comments.map((com) => (
-                  <div>
-                    <S.CommentBox key={com.id}>
-                      <h5>{com.author}</h5>
-                      <span>{com.content}</span>
-                      <div>
-                        <p>작성 날짜 :{com.date}</p>
-                      </div>
-                    </S.CommentBox>
-                    {com.childrenComment.length !== 0 ? (
-                      com.childrenComment.map((e, idx) => (
-                        <>
-                          <S.ChildrenCommentWrapper key={e.id}>
-                            <h4>
-                              <MdOutlineSubdirectoryArrowRight />
-                              {e.author}
-                            </h4>
-                            <span>{e.content}</span>
-                            <div>
-                              <p>작성 날짜 :{e.date}</p>
-                            </div>
-                          </S.ChildrenCommentWrapper>
-                          <hr />
-                          {com.childrenComment.length - 1 !== idx ? null : (
-                            <S.ChildrenInputWrapper>
-                              <div>
-                                <MdOutlineSubdirectoryArrowRight />
-                                <Input comment={true} />
-                              </div>
-                              <span>
-                                <CiLock /> 비밀댓글
-                                <input type="checkbox" />
-                              </span>
-                            </S.ChildrenInputWrapper>
-                          )}
-                        </>
-                      ))
-                    ) : (
-                      <S.ChildrenInputWrapper>
-                        <div>
-                          <MdOutlineSubdirectoryArrowRight />
-                          <Input comment={true} />
-                        </div>
-                        <span>
-                          <CiLock /> 비밀댓글
-                          <input type="checkbox" />
-                        </span>
-                      </S.ChildrenInputWrapper>
-                    )}
-                  </div>
-                ))}
-              </S.CommentsContainer>
-            </>
+            <S.CommentsContainer>
+              {comments.map((e) => (
+                <Comment com={e} key={e.id} />
+              ))}
+            </S.CommentsContainer>
           )}
         </S.CommentWrapper>
       </S.InputWrapper>
