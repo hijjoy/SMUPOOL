@@ -10,6 +10,7 @@ const pinData = [
   {
     id: 1,
     title: "공지: 반드시 읽어주세요!",
+    content: "내용 예시",
     author: "hijjoy",
     date: "2024-05-27",
     see: 5,
@@ -18,6 +19,7 @@ const pinData = [
   {
     id: 2,
     title: "자주 물어보는 질문 모음",
+    content: "내용 예시",
     author: "hijjoy",
     date: "2024-05-27",
     see: 4,
@@ -29,6 +31,7 @@ const data = [
   {
     id: 1,
     title: "wpahr",
+    content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
@@ -37,6 +40,7 @@ const data = [
   {
     id: 2,
     title: "wpaddhrwpaddhrwpaddhrwpaddhr",
+    content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 7,
@@ -45,6 +49,7 @@ const data = [
   {
     id: 3,
     title: "wpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhr",
+    content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
@@ -53,6 +58,7 @@ const data = [
   {
     id: 4,
     title: "급한 질문입니다 !",
+    content: "급한 질문입니다 내용 예시 !",
     author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
@@ -61,6 +67,7 @@ const data = [
   {
     id: 5,
     title: "wpaddhr",
+    content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
@@ -69,6 +76,7 @@ const data = [
   {
     id: 6,
     title: "wpaddhr",
+    content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,
@@ -77,6 +85,7 @@ const data = [
   {
     id: 7,
     title: "냠냠",
+    content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
     date: "2024-05-27",
     see: 4,

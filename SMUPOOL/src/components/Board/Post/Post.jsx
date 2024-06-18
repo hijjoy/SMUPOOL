@@ -9,7 +9,7 @@ const Post = ({ post, pin, idx }) => {
   return (
     <S.Container $pin={pin}>
       <S.No>{pin ? <img src={Pin} /> : idx}</S.No>
-      <S.Title $pin={pin} onClick={() => nav(`/board/${id}`)}>
+      <S.Title $pin={pin} onClick={() => nav(`/board/${id}`, { state: { ...post } })}>
         <span>{title}</span>
         {lock ? <img src={Lock} /> : null}
       </S.Title>

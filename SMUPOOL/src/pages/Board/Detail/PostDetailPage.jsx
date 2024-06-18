@@ -1,18 +1,11 @@
+import { useLocation } from "react-router-dom";
 import Comments from "../../../components/Board/Comments";
 import * as S from "./PostDetailPage.style";
 
 const PostDetailPage = () => {
-  const data = {
-    id: 1,
-    title: "제목 예시",
-    content: "내용 예시",
-    author: "202110900 ㅂㅇㄱ",
-    date: "2024-06-21",
-    see: 4,
-    lock: false,
-  };
+  const location = useLocation();
 
-  const { title, author, see, date, content } = data;
+  const { title, author, see, date, content } = location.state;
   return (
     <S.Container>
       <S.Title>
