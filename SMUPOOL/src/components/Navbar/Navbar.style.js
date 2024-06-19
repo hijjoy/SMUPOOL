@@ -26,6 +26,7 @@ const Wrapper = styled.div`
     opacity: 0.5;
     font-weight: 500;
     font-size: 15px;
+    cursor: pointer;
   }
 `;
 

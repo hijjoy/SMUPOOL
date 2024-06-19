@@ -7,7 +7,7 @@ import { SlArrowDown } from "react-icons/sl";
 const MypagePage = () => {
   return (
     <S.Container>
-      <Navbar text=" 마이페이지" />
+      <Navbar />
       <S.Wrapper>
         <S.UserWrapper>
           <S.UserInfo>
