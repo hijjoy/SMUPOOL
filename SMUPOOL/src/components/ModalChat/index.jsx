@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as S from "./ModalChat.style";
 import ModalPortal from "../Portal/Portal";
 import { IoArrowDownSharp } from "react-icons/io5";
+import { FaArrowAltCircleUp } from "react-icons/fa";
 import Button from "../Button";
 import theme from "../../styles/theme";
 import useForm from "../../hooks/useForm";
@@ -17,6 +18,8 @@ const ModalChat = ({ showModal, onClick }) => {
     validate: validateUser,
   });
 
+  const [message, setMessage] = useState("");
+
   const isFormValid = !user.errors.name && !user.errors.phoneNum;
 
   const onSubmit = (e) => {
@@ -31,7 +34,19 @@ const ModalChat = ({ showModal, onClick }) => {
           <IoArrowDownSharp />
         </S.CloseModal>
         {showChat ? (
-          <S.Wrapper>dd</S.Wrapper>
+          <S.Wrapper>
+            <S.ChatWrapper>
+              <S.InputForm onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="실시간 상담 내용을 입력해 주세요. 실시간 상담 시간: 평일 9시~18시"
+                />
+                <FaArrowAltCircleUp onClick={() => console.log("제출")} />
+              </S.InputForm>
+            </S.ChatWrapper>
+          </S.Wrapper>
         ) : (
           <S.LoginWrapper>
             <span>

@@ -86,4 +86,54 @@ const Wrapper = styled.div`
   ${theme.ALIGN.COLUMN_CENTER};
 `;
 
-export { Container, CloseModal, LoginWrapper, FormWrapper, Wrapper };
+const ChatWrapper = styled.div`
+  position: relative;
+  margin-top: 30px;
+  width: 600px;
+  height: 460px;
+  background-color: #f7f7f7;
+  box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.1);
+`;
+
+const InputForm = styled.form`
+  border-radius: 5px;
+  background-color: #fff;
+  width: 100%;
+  ${theme.ALIGN.ROW_SPACE_BETWEEN};
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  input {
+    padding: 0 10px;
+    border-radius: 5px;
+    width: 90%;
+    height: 50px;
+    border: none;
+    font-size: 15px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      position: relative;
+      font-size: 12px;
+      color: #9c9c9c;
+    }
+  }
+
+  svg {
+    margin-right: 15px;
+    width: 30px;
+    height: 30px;
+    color: #186dec;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(0.97);
+    }
+  }
+`;
+
+export { Container, CloseModal, LoginWrapper, FormWrapper, Wrapper, ChatWrapper, InputForm };
