@@ -2,7 +2,7 @@ const COLOR = {
   MAIN: "#186DEC",
   BLUE: "#74A6D3",
   GRAY: "#E8EAEC",
-  DARK_BLUE: "2D415F",
+  DARK_BLUE: "#2D415F",
 };
 
 const ALIGN = {
@@ -33,6 +33,11 @@ const ALIGN = {
           `,
 };
 
-const theme = { COLOR, ALIGN };
+const SCREEN_SIZE = {
+  MOBILE: `screen and (max-width: 480px)`,
+  TABLET: "screen and (max-width: 768px)",
+};
+
+const theme = { COLOR, ALIGN, SCREEN_SIZE };
 
 export default theme;
