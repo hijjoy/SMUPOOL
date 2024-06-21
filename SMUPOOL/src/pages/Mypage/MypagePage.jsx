@@ -3,8 +3,16 @@ import { Navbar } from "../../components";
 import Profile from "../../assets/images/profile.webp";
 import SubmitButton from "../../components/SubmitButton";
 import { SlArrowDown } from "react-icons/sl";
+import { useState } from "react";
+import info from "../../constants/PersonalInfo";
+import use from "../../constants/use";
 
 const MypagePage = () => {
+  const [open, setOpen] = useState({
+    info: false,
+    use: false,
+  });
+
   return (
     <S.Container>
       <Navbar />
@@ -36,14 +44,42 @@ const MypagePage = () => {
           <div>
             <span>
               <p>이용약관 </p>
-              <SlArrowDown />
+              <S.ArrowButton $open={open.use} onClick={() => setOpen((prev) => ({ info: false, use: !prev.use }))}>
+                <SlArrowDown />
+              </S.ArrowButton>
             </span>
             <span>
-              <p>개인정보처리방침</p> <SlArrowDown />
+              <p>개인정보처리방침</p>
+              <S.ArrowButton $open={open.info} onClick={() => setOpen((prev) => ({ use: false, info: !prev.info }))}>
+                <SlArrowDown />
+              </S.ArrowButton>
             </span>
           </div>
           <SubmitButton text="저장" />
         </S.BottomWrapper>
+        {open.info ? (
+          <S.Content>
+            <h1>개인정보 처리방침</h1>
+            {info.map((e) => (
+              <>
+                <h3>{e.title}</h3>
+                <p>{e.content}</p>
+              </>
+            ))}
+          </S.Content>
+        ) : null}
+
+        {open.use ? (
+          <S.Content>
+            <h1>서비스 이용약관</h1>
+            {use.map((e) => (
+              <>
+                <h3>{e.title}</h3>
+                <p>{e.content}</p>
+              </>
+            ))}
+          </S.Content>
+        ) : null}
       </S.Wrapper>
     </S.Container>
   );

@@ -106,7 +106,6 @@ const BottomWrapper = styled.div`
   }
 
   span {
-    cursor: pointer;
     display: flex;
     color: #8a9099;
     font-size: 13px;
@@ -116,6 +115,41 @@ const BottomWrapper = styled.div`
       margin-right: 5px;
     }
   }
+`;
+
+const Content = styled.div`
+  opacity: 0.8;
+  background-color: ${theme.COLOR.GRAY};
+  padding: 15px;
+  width: 55%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  h3 {
+    margin-top: 30px;
+    font-size: 15px;
+    margin-bottom: 3px;
+  }
+
+  p {
+    font-size: 13px;
+    word-break: keep-all;
+  }
+
+  h1 {
+    font-weight: 900;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+`;
+
+const ArrowButton = styled.button`
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+  height: 15px;
+
+  transform: ${(props) => (props.$open ? "rotate(180deg)" : "")};
 `;
 
 export {
@@ -129,4 +163,6 @@ export {
   FormWrapper,
   FormBox,
   BottomWrapper,
+  Content,
+  ArrowButton,
 };
