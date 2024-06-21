@@ -7,9 +7,9 @@ const Post = ({ post, pin, idx }) => {
   const { id, title, author, createdAt, see, lock } = post;
   const nav = useNavigate();
   return (
-    <S.Container $pin={pin}>
+    <S.Container $pin={pin} onClick={() => nav(`/board/${id}`, { state: { ...post } })}>
       <S.No>{pin ? <img src={Pin} /> : idx}</S.No>
-      <S.Title $pin={pin} onClick={() => nav(`/board/${id}`, { state: { ...post } })}>
+      <S.Title $pin={pin}>
         <span>{title}</span>
         {lock ? <img src={Lock} /> : null}
       </S.Title>
