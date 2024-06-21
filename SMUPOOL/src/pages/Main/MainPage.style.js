@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import { motion } from "framer-motion";
 
 const Contaienr = styled.div`
   background: linear-gradient(
@@ -16,6 +17,11 @@ const Contaienr = styled.div`
   height: 100vh;
 
   display: flex;
+
+  .profile {
+    width: 100%;
+    position: absolute;
+  }
 `;
 
 const ImgWrapper = styled.div`

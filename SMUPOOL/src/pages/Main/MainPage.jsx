@@ -11,6 +11,8 @@ import theme from "../../styles/theme";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ModalChat from "../../components/ModalChat";
+import { motion } from "framer-motion";
+
 
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -20,10 +22,17 @@ const MainPage = () => {
 
   return (
     <S.Contaienr>
-      <S.Profile $showModal={showModal}>
-        <img src={Profile} alt="profile" />
-        <span>{nickname}님 스뮤풀에 오신 것을 환영합니다!</span>
-      </S.Profile>
+      <motion.div
+        initial={{ right: -100, opacity: 0 }}
+        animate={{ right: 0, opacity: 1 }}
+        transition={{ duration: 1.3 }}
+        className="profile"
+      >
+        <S.Profile $showModal={showModal}>
+          <img src={Profile} alt="profile" />
+          <span>{nickname}님 스뮤풀에 오신 것을 환영합니다!</span>
+        </S.Profile>
+      </motion.div>
       <S.ImgWrapper>
         <S.Portal src={Portal} alt="portal" />
         <S.Hand src={ImgHand} alt="hand-img" />
