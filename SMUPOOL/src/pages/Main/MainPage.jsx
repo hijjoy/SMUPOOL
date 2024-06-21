@@ -9,6 +9,7 @@ import { RiSendPlaneFill } from "react-icons/ri";
 import { AiFillMessage } from "react-icons/ai";
 import theme from "../../styles/theme";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const MainPage = () => {
   const nav = useNavigate();
@@ -16,10 +17,17 @@ const MainPage = () => {
 
   return (
     <S.Contaienr>
-      <S.Profile>
-        <img src={Profile} alt="profile" />
-        <span>{nickname}님 스뮤풀에 오신 것을 환영합니다!</span>
-      </S.Profile>
+      <motion.div
+        initial={{ right: -100, opacity: 0 }}
+        animate={{ right: 0, opacity: 1 }}
+        transition={{ duration: 1.3 }}
+        className="profile"
+      >
+        <S.Profile>
+          <img src={Profile} alt="profile" />
+          <span>{nickname}님 스뮤풀에 오신 것을 환영합니다!</span>
+        </S.Profile>
+      </motion.div>
       <S.ImgWrapper>
         <S.Portal src={Portal} alt="portal" />
         <S.Hand src={ImgHand} alt="hand-img" />
