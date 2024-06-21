@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./ModalChat.style";
 import ModalPortal from "../Portal/Portal";
 import { IoArrowDownSharp } from "react-icons/io5";
@@ -7,9 +7,15 @@ import Button from "../Button";
 import theme from "../../styles/theme";
 import useForm from "../../hooks/useForm";
 import { validateUser } from "../../utils/validate";
+import socket from "../../api/server";
+import MessageContainer from "../MessageContainer/MessageContainer";
 
 const ModalChat = ({ showModal, onClick }) => {
+  const [person, setPerson] = useState(null);
   const [showChat, setShowChat] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageList, setMessageList] = useState([]);
+
   const user = useForm({
     initialValue: {
       name: "",
@@ -18,13 +24,30 @@ const ModalChat = ({ showModal, onClick }) => {
     validate: validateUser,
   });
 
-  const [message, setMessage] = useState("");
-
   const isFormValid = !user.errors.name && !user.errors.phoneNum;
 
   const onSubmit = (e) => {
     e.preventDefault();
+    socket.emit("login", user.name, (res) => {
+      if (res?.ok) {
+        setPerson(res.data);
+        setShowChat(true);
+      }
+    });
     setShowChat(true);
+  };
+
+  useEffect(() => {
+    socket.on("message", (message) => {
+      setMessageList((prev) => prev.concat(message));
+    });
+  }, []);
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    socket.emit("sendMessage", message, (res) => {
+      console.log("sendMessage response", res);
+    });
   };
 
   return (
@@ -36,14 +59,16 @@ const ModalChat = ({ showModal, onClick }) => {
         {showChat ? (
           <S.Wrapper>
             <S.ChatWrapper>
-              <S.InputForm onSubmit={(e) => e.preventDefault()}>
+              <MessageContainer messageList={messageList} user={person} />
+
+              <S.InputForm onSubmit={sendMessage}>
                 <input
                   type="text"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="실시간 상담 내용을 입력해 주세요. 실시간 상담 시간: 평일 9시~18시"
                 />
-                <FaArrowAltCircleUp onClick={() => console.log("제출")} />
+                <FaArrowAltCircleUp onClick={sendMessage} />
               </S.InputForm>
             </S.ChatWrapper>
           </S.Wrapper>
