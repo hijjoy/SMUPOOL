@@ -4,7 +4,7 @@ import Lock from "../../../assets/images/Lock.webp";
 import { useNavigate } from "react-router-dom";
 
 const Post = ({ post, pin, idx }) => {
-  const { id, title, author, date, see, lock } = post;
+  const { id, title, author, createdAt, see, lock } = post;
   const nav = useNavigate();
   return (
     <S.Container $pin={pin}>
@@ -15,7 +15,7 @@ const Post = ({ post, pin, idx }) => {
       </S.Title>
       <S.Wrapper>
         <div>{author}</div>
-        <span>{date}</span>
+        <span>{createdAt}</span>
         <p>{see}</p>
       </S.Wrapper>
     </S.Container>

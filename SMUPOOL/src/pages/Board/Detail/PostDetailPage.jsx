@@ -5,14 +5,14 @@ import * as S from "./PostDetailPage.style";
 const PostDetailPage = () => {
   const location = useLocation();
 
-  const { title, author, see, date, content } = location.state;
+  const { title, author, see, createdAt, content } = location.state;
   return (
     <S.Container>
       <S.Title>
         <h1>{title}</h1>
         <div>
           <p>작성자 : {author}</p>
-          <p>작성 날짜 : {date}</p>
+          <p>작성 날짜 : {createdAt}</p>
           <p>조회수: {see}</p>
         </div>
       </S.Title>
