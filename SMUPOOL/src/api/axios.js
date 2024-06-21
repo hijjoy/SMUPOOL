@@ -10,7 +10,7 @@ const postsAxios = axios.create({
 });
 
 const commentAxios = axios.create({
-  baseURL: "http://localhost:3000/api/post",
+  baseURL: "http://localhost:3000/api/comment",
   headers: header,
 });
 
