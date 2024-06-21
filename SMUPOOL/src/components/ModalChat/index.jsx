@@ -29,6 +29,7 @@ const ModalChat = ({ showModal, onClick }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     socket.emit("login", [user.name, user.phoneNum], (res) => {
+      console.log(res);
       if (res?.ok) {
         setPerson(res.data);
         setShowChat(true);
