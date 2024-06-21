@@ -7,6 +7,7 @@ import { BsPencilFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPosts } from "../../api/posts";
+import today from "../../utils/today";
 
 const pinData = [
   {
@@ -35,7 +36,7 @@ const data = [
     title: "wpahr",
     content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
-    createdAt: "2024-05-27",
+    createdAt: today(),
     see: 4,
     lock: false,
   },

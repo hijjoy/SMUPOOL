@@ -6,6 +6,7 @@ import SubmitButton from "../../../components/SubmitButton/index";
 import { useMutation } from "@tanstack/react-query";
 import { createPost } from "../../../api/posts";
 import queryClient from "../../../api/queryClient";
+import today from "../../../utils/today";
 
 const CreatePage = () => {
   const nav = useNavigate();
@@ -24,6 +25,7 @@ const CreatePage = () => {
     files: [],
     lock: false,
     pwd: "",
+    createdAt: today(),
   });
 
   const { title, content, files, lock, pwd } = userInput;
