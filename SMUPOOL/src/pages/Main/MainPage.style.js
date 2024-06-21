@@ -1,6 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import theme from "../../styles/theme";
-import { motion } from "framer-motion";
+
+const changeOpacity = keyframes`
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 0;
+  }
+`;
 
 const Contaienr = styled.div`
   background: linear-gradient(
@@ -69,7 +77,7 @@ const Portal = styled.img`
   top: 240px;
   left: 170px;
   width: 70px;
-  opacity: 0.8;
+  animation: ${changeOpacity} 1.5s 0s infinite linear alternate;
 `;
 
 const BigPortal = styled.img`
@@ -77,7 +85,7 @@ const BigPortal = styled.img`
   top: 100px;
   right: 10px;
   width: 100px;
-  opacity: 0.8;
+  animation: ${changeOpacity} 1.3s 0s infinite linear alternate;
   transform: rotate(135deg);
 
   @media ${theme.SCREEN_SIZE.TABLET} {
@@ -86,6 +94,7 @@ const BigPortal = styled.img`
 `;
 
 const MiniStar = styled.img`
+  animation: ${changeOpacity} 1s 0s infinite linear alternate;
   position: absolute;
   bottom: 300px;
   right: 60px;
@@ -96,6 +105,8 @@ const MiniStar = styled.img`
   }
 `;
 const Star = styled(MiniStar)`
+  animation: ${changeOpacity} 1.2s 0s infinite linear alternate;
+
   bottom: 365px;
   right: 35px;
   width: 40px;
