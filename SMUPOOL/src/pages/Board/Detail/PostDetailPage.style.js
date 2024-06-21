@@ -20,6 +20,7 @@ const Title = styled.div`
   border: none;
   border-bottom: 2px solid ${theme.COLOR.DARK_BLUE};
   width: 100%;
+
   font-size: 30px;
   padding: 10px;
   outline: none;
