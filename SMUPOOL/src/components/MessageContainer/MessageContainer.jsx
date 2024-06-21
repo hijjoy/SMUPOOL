@@ -5,7 +5,7 @@ import { Container } from "@mui/system";
 const MessageContainer = ({ messageList, user }) => {
   return (
     <div>
-      {messageList.map((message, index) => {
+      {messageList.map((message) => {
         return (
           <Container key={message._id} className="message-container">
             {message.user.name === "system" ? (
@@ -18,7 +18,7 @@ const MessageContainer = ({ messageList, user }) => {
               </div>
             ) : (
               <div className="your-message-container">
-                <img
+                {/* <img
                   src="/profile.jpeg"
                   className="profile-image"
                   style={
@@ -29,7 +29,7 @@ const MessageContainer = ({ messageList, user }) => {
                       ? { visibility: "visible" }
                       : { visibility: "hidden" }
                   }
-                />
+                /> */}
                 <div className="your-message">{message.chat}</div>
               </div>
             )}
