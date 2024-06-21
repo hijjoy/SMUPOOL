@@ -1,11 +1,30 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Comments from "../../../components/Board/Comments";
 import * as S from "./PostDetailPage.style";
+import { useMutation } from "@tanstack/react-query";
+import { delectPost } from "../../../api/posts";
+import queryClient from "../../../api/queryClient";
 
 const PostDetailPage = () => {
   const location = useLocation();
+  const nav = useNavigate();
 
-  const { title, author, see, createdAt, content } = location.state;
+  // const { mutate } = useMutation({
+  //   mutationFn: delectPost,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({
+  //       queryKey: ["posts"],
+  //       refetchType: "none",
+  //     });
+  //     nav("/board");
+  //   },
+  // });
+
+  // const handleDelete = () => {
+  //   mutate(id);
+  // };
+
+  const { title, author, see, createdAt, content, id } = location.state;
   return (
     <S.Container>
       <S.Title>
