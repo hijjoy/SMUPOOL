@@ -1,27 +1,25 @@
-import React, { useState } from "react";
-import "./MessageContainer.css";
-import { Container } from "@mui/system";
+import React from "react";
+import * as S from "./MessageContainer.style";
 import Profile from "../../assets/images/profile.webp";
 
 const MessageContainer = ({ messageList, user }) => {
   return (
-    <div>
+    <S.Container>
       {messageList.map((message) => {
         return (
-          <Container key={message._id} className="message-container">
+          <div key={message._id}>
             {message.user.name === "system" ? (
-              <div className="system-message-container">
-                <p className="system-message">{message.chat}</p>
-              </div>
+              <S.WelcomeMsg>
+                <p>{message.chat}</p>
+              </S.WelcomeMsg>
             ) : message.user.name === user.name ? (
-              <div className="my-message-container">
-                <div className="my-message">{message.chat}</div>
-              </div>
+              <S.MyMsg>
+                <div>{message.chat}</div>
+              </S.MyMsg>
             ) : (
-              <div className="your-message-container">
+              <S.yourMsg>
                 <img
                   src={Profile}
-                  className="profile-image"
                   style={
                     (index === 0 ? { visibility: "visible" } : messageList[index - 1].user.name === user.name) ||
                     messageList[index - 1].user.name === "system"
@@ -29,13 +27,13 @@ const MessageContainer = ({ messageList, user }) => {
                       : { visibility: "hidden" }
                   }
                 />
-                <div className="your-message">{message.chat}</div>
-              </div>
+                <div>{message.chat}</div>
+              </S.yourMsg>
             )}
-          </Container>
+          </div>
         );
       })}
-    </div>
+    </S.Container>
   );
 };
 
