@@ -30,6 +30,13 @@ const Title = styled.div`
     color: ${theme.COLOR.DARK_BLUE};
     font-weight: 700;
     font-size: 30px;
+    width: 60%;
+    overflow-wrap: break-word;
+
+    @media ${theme.SCREEN_SIZE.TABLET} {
+      font-size: 20px;
+      width: 50%;
+    }
   }
 
   div {
@@ -39,6 +46,10 @@ const Title = styled.div`
       font-size: 12px;
       color: #a7a7a7;
       padding-left: 10px;
+
+      @media ${theme.SCREEN_SIZE.TABLET} {
+        font-size: 10px;
+      }
     }
   }
 `;
@@ -60,6 +71,10 @@ const ContentWrapper = styled.div`
 
 const Content = styled.div`
   width: 89%;
+
+  @media ${theme.SCREEN_SIZE.TABLET} {
+    font-size: 13px;
+  }
 `;
 
 const BtnBox = styled.div`
