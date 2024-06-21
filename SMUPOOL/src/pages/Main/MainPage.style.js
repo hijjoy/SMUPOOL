@@ -102,9 +102,9 @@ const Star = styled(MiniStar)`
 `;
 
 const ButtonWrapper = styled.div`
+  display: ${(props) => (props.$showModal ? "none" : "flex")};
   z-index: 5;
   position: absolute;
-  display: flex;
   right: 50px;
   bottom: 40px;
 `;
@@ -114,6 +114,7 @@ const Profile = styled.div`
   right: 30px;
   top: 20px;
   ${theme.ALIGN.ROW_CENTER};
+  display: ${(props) => (props.$showModal ? "none" : "")};
 
   img {
     width: 35px;

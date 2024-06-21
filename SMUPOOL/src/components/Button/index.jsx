@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
-const Button = ({ text, onClick, svg, color }) => {
+const Button = ({ text, onClick, svg, bgcolor, color, disable, width }) => {
   return (
-    <Container onClick={onClick} $color={color}>
+    <Container onClick={onClick} $color={color} $bgcolor={bgcolor} disabled={disable} $width={width}>
       {svg}
       <div> {text}</div>
     </Container>
@@ -18,12 +18,12 @@ const Container = styled.button`
   justify-content: center;
   align-items: center;
 
-  width: 185px;
+  width: ${(props) => props.$width};
   height: 45px;
   border: none;
   border-radius: 8px;
-  background-color: ${(props) => props.$color};
-  color: ${(props) => (props.$color === theme.COLOR.MAIN ? "#fff" : "")};
+  background-color: ${(props) => props.$bgcolor};
+  color: ${(props) => props.$color};
   margin-right: 20px;
   font-weight: 500;
 
@@ -34,6 +34,6 @@ const Container = styled.button`
   }
 
   &:hover {
-    transform: scale(0.98);
+    transform: ${(props) => (props.disabled ? "" : "scale(0.98)")};
   }
 `;

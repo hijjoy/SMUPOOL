@@ -9,9 +9,14 @@ import { RiSendPlaneFill } from "react-icons/ri";
 import { AiFillMessage } from "react-icons/ai";
 import theme from "../../styles/theme";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import ModalChat from "../../components/ModalChat";
 import { motion } from "framer-motion";
 
+
 const MainPage = () => {
+  const [showModal, setShowModal] = useState(false);
+
   const nav = useNavigate();
   const nickname = "24학번 김슴우";
 
@@ -23,7 +28,7 @@ const MainPage = () => {
         transition={{ duration: 1.3 }}
         className="profile"
       >
-        <S.Profile>
+        <S.Profile $showModal={showModal}>
           <img src={Profile} alt="profile" />
           <span>{nickname}님 스뮤풀에 오신 것을 환영합니다!</span>
         </S.Profile>
@@ -41,10 +46,30 @@ const MainPage = () => {
           <br /> 스뮤풀 SMUPOOL
         </h1>
       </S.TextWrapper>
-      <S.ButtonWrapper>
-        <Button text="문의사항" color={theme.COLOR.MAIN} svg={<RiSendPlaneFill />} onClick={() => nav("/board")} />
-        <Button text="실시간 상담" svg={<AiFillMessage color={theme.COLOR.MAIN} />} />
+      <S.ButtonWrapper $showModal={showModal}>
+        <Button
+          text="문의사항"
+          bgcolor={theme.COLOR.MAIN}
+          color="#fff"
+          svg={<RiSendPlaneFill />}
+          onClick={() => nav("/board")}
+          width="185px"
+        />
+        <Button
+          text="실시간 상담"
+          svg={<AiFillMessage color={theme.COLOR.MAIN} />}
+          onClick={() => setShowModal(true)}
+          width="185px"
+        />
       </S.ButtonWrapper>
+
+      <ModalChat
+        showModal={showModal}
+        onClick={() => {
+          setShowModal((prev) => !prev);
+          location.reload();
+        }}
+      />
     </S.Contaienr>
   );
 };
