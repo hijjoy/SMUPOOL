@@ -26,9 +26,12 @@ const ModalChat = ({ showModal, onClick }) => {
 
   const isFormValid = !user.errors.name && !user.errors.phoneNum;
 
+  console.log(user.values.name);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    socket.emit("login", [user.name, user.phoneNum], (res) => {
+
+    socket.emit("login", [user.values.name, user.values.phoneNum], (res) => {
       console.log(res);
       if (res?.ok) {
         setPerson(res.data);
@@ -48,6 +51,7 @@ const ModalChat = ({ showModal, onClick }) => {
     e.preventDefault();
     socket.emit("sendMessage", message, (res) => {
       console.log("sendMessage response", res);
+      setMessage("");
     });
   };
 

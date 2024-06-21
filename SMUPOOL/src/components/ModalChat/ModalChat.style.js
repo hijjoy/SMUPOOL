@@ -5,7 +5,7 @@ const Container = styled.div`
   display: ${(props) => (props.$showModal ? "" : "none")};
 
   position: fixed;
-  top: 110px;
+  top: 10%;
   left: 100px;
 
   background-color: #fff;
