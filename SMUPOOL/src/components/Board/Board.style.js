@@ -134,4 +134,10 @@ const PageButton = styled.div`
     }
   }
 `;
-export { Container, Attributes, Wrapper, Number, PostWrapper, FootWrapper, Search, Button, PageButton };
+
+const NoSearch = styled.div`
+  width: 100%;
+  height: 100%;
+  ${theme.ALIGN.COLUMN_CENTER};
+`;
+export { Container, Attributes, Wrapper, Number, PostWrapper, FootWrapper, Search, Button, PageButton, NoSearch };

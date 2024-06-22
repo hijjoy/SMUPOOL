@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPosts } from "../../api/posts";
 import useDebounce from "../../hooks/useDebounce";
 import LoadingComponent from "../Loading";
+import ErrorComponent from "../Error";
 
 const Board = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +17,7 @@ const Board = () => {
   const debounceSarch = useDebounce(search, 500);
   const nav = useNavigate();
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ["posts", currentPage, debounceSarch],
     queryFn: () => getPosts(currentPage, debounceSarch),
     staleTime: 10 * 1000,
@@ -32,19 +33,37 @@ const Board = () => {
     );
   }
 
-  if (data) {
+  if (isError) {
     content = (
       <S.PostWrapper>
-        {data.map(
-          (
-            e,
-            // reverse 일단 데이터에 따라 이후 수정
-          ) => (
-            <Post post={e} key={e.id} />
-          ),
-        )}
+        <ErrorComponent />
       </S.PostWrapper>
     );
+  }
+
+  if (data) {
+    if (data.length === 0) {
+      content = (
+        <S.PostWrapper>
+          <S.NoSearch>
+            <p>"{debounceSarch}"에 맞는 게시글이 없습니다</p>
+          </S.NoSearch>
+        </S.PostWrapper>
+      );
+    } else {
+      content = (
+        <S.PostWrapper>
+          {data.map(
+            (
+              e,
+              // reverse 일단 데이터에 따라 이후 수정
+            ) => (
+              <Post post={e} key={e.id} />
+            ),
+          )}
+        </S.PostWrapper>
+      );
+    }
   }
 
   return (
