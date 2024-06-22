@@ -4,8 +4,7 @@ const { VITE_TOKEN } = import.meta.env;
 
 const header = {
   "Content-Type": "application/json",
-  Authorization:
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIwMjExMDk3N0BzYW5nbXl1bmcua3IiLCJyb2xlIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTcxOTA3OTY1MiwiZXhwIjoxNzE5MDgzMjUyfQ.bBrGnB9XCeIhABdqAN4Xmo5MPnp5e-kMAra3MuI_M3o",
+  Authorization: `Bearer ${VITE_TOKEN}`,
 };
 
 const postsAxios = axios.create({
