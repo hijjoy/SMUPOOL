@@ -5,6 +5,9 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
 import { BsPencilFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getPosts } from "../../api/posts";
+import today from "../../utils/today";
 
 const pinData = [
   {
@@ -12,7 +15,7 @@ const pinData = [
     title: "공지: 반드시 읽어주세요!",
     content: "내용 예시",
     author: "hijjoy",
-    date: "2024-05-27",
+    createdAt: "2024-05-27",
     see: 5,
     lock: false,
   },
@@ -21,7 +24,7 @@ const pinData = [
     title: "자주 물어보는 질문 모음",
     content: "내용 예시",
     author: "hijjoy",
-    date: "2024-05-27",
+    createdAt: "2024-05-27",
     see: 4,
     lock: false,
   },
@@ -33,7 +36,7 @@ const data = [
     title: "wpahr",
     content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
-    date: "2024-05-27",
+    createdAt: today(),
     see: 4,
     lock: false,
   },
@@ -42,7 +45,7 @@ const data = [
     title: "wpaddhrwpaddhrwpaddhrwpaddhr",
     content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
-    date: "2024-05-27",
+    createdAt: "2024-05-27",
     see: 7,
     lock: false,
   },
@@ -51,7 +54,7 @@ const data = [
     title: "wpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhrwpaddhr",
     content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
-    date: "2024-05-27",
+    createdAt: "2024-05-27",
     see: 4,
     lock: false,
   },
@@ -60,7 +63,7 @@ const data = [
     title: "급한 질문입니다 !",
     content: "급한 질문입니다 내용 예시 !",
     author: "202110900 ㅂㅇㄱ",
-    date: "2024-05-27",
+    createdAt: "2024-05-27",
     see: 4,
     lock: true,
   },
@@ -69,7 +72,7 @@ const data = [
     title: "wpaddhr",
     content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
-    date: "2024-05-27",
+    createdAt: "2024-05-27",
     see: 4,
     lock: false,
   },
@@ -78,7 +81,7 @@ const data = [
     title: "wpaddhr",
     content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
-    date: "2024-05-27",
+    createdAt: "2024-05-27",
     see: 4,
     lock: false,
   },
@@ -87,7 +90,7 @@ const data = [
     title: "냠냠",
     content: "내용 예시",
     author: "202110900 ㅂㅇㄱ",
-    date: "2024-05-27",
+    createdAt: "2024-05-27",
     see: 4,
     lock: false,
   },
@@ -96,6 +99,12 @@ const data = [
 const Board = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const nav = useNavigate();
+
+  // const { data, isPending } = useQuery({
+  //   queryKey: ["posts"],
+  //   queryFn: getPosts,
+  //   staleTime: 10 * 1000,
+  // });
 
   return (
     <S.Container>

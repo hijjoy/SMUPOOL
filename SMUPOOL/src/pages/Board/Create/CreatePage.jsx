@@ -3,15 +3,29 @@ import * as S from "./CreatePage.style";
 import { CiLock } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import SubmitButton from "../../../components/SubmitButton/index";
+import { useMutation } from "@tanstack/react-query";
+import { createPost } from "../../../api/posts";
+import queryClient from "../../../api/queryClient";
+import today from "../../../utils/today";
 
 const CreatePage = () => {
   const nav = useNavigate();
+
+  // const { mutate } = useMutation({
+  //   mutationFn: createPost,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({ queryKey: ["posts"] });
+  //     nav("/board");
+  //   },
+  // });
+
   const [userInput, setUserInput] = useState({
     title: "",
     content: "",
     files: [],
     lock: false,
     pwd: "",
+    createdAt: today(),
   });
 
   const { title, content, files, lock, pwd } = userInput;
@@ -33,6 +47,7 @@ const CreatePage = () => {
   const handleSubmit = () => {
     if (title.trim() !== "" && content.trim() !== "") {
       // 백엔드 통신 후 게시판으로 이동
+      // mutate(userInput);
       nav("/board");
     } else {
       alert("제목과 본문을 입력하세요 !");

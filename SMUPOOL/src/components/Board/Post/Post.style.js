@@ -2,11 +2,16 @@ import styled from "styled-components";
 import theme from "../../../styles/theme";
 
 const Container = styled.div`
+  cursor: pointer;
   ${theme.ALIGN.ROW_SPACE_BETWEEN};
   width: 100%;
   height: 48px;
   border-bottom: 0.5px solid black;
   background-color: ${(props) => (props.$pin ? "#E0F0FF" : "inherit")};
+
+  &:hover {
+    background-color: ${(props) => (props.$pin ? "#cce5fc" : theme.COLOR.GRAY)};
+  }
 `;
 
 const No = styled.div`
@@ -22,7 +27,6 @@ const No = styled.div`
 `;
 
 const Title = styled.div`
-  cursor: pointer;
   display: flex;
   align-items: center;
   padding-left: 20px;

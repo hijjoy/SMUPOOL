@@ -117,6 +117,7 @@ const PageButton = styled.div`
 
     &:hover {
       transform: scale(0.95);
+      color: ${theme.COLOR.MAIN};
     }
   }
 
@@ -125,6 +126,7 @@ const PageButton = styled.div`
     border: none;
     background-color: transparent;
     cursor: pointer;
+
     &:disabled {
       cursor: not-allowed;
     }
