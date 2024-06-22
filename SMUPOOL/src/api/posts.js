@@ -24,10 +24,13 @@ const getDetailPost = async (id) => {
 };
 
 const createPost = async (postData) => {
-  const res = await postsAxios.post(postData);
-  console.log(res);
-
-  return res.json();
+  console.log(postData);
+  try {
+    const res = await postsAxios.post(postData);
+    return res.data.result;
+  } catch (error) {
+    console.log(res);
+  }
 };
 
 const delectPost = async (id) => {

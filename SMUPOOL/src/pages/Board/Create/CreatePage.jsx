@@ -10,25 +10,26 @@ import today from "../../../utils/today";
 
 const CreatePage = () => {
   const nav = useNavigate();
+  const [files, setFiles] = useState([]);
 
-  // const { mutate } = useMutation({
-  //   mutationFn: createPost,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["posts"] });
-  //     nav("/board");
-  //   },
-  // });
+  const { mutate } = useMutation({
+    mutationFn: createPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      nav("/board");
+    },
+  });
 
   const [userInput, setUserInput] = useState({
     title: "",
     content: "",
-    files: [],
-    lock: false,
-    pwd: "",
-    createdAt: today(),
+    // files: [],
+    secret: false,
+    notification: false,
+    // pwd: "",
   });
 
-  const { title, content, files, lock, pwd } = userInput;
+  const { title, content, secret } = userInput;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,17 +39,12 @@ const CreatePage = () => {
   const handleChangeFile = (e) => {
     const files = Array.from(e.target.files);
     const fileURLs = files.map((file) => URL.createObjectURL(file));
-    setUserInput((prev) => ({
-      ...prev,
-      files: [...prev.files, ...fileURLs],
-    }));
+    setFiles((prev) => [...prev, ...fileURLs]);
   };
 
   const handleSubmit = () => {
     if (title.trim() !== "" && content.trim() !== "") {
-      // 백엔드 통신 후 게시판으로 이동
-      // mutate(userInput);
-      nav("/board");
+      mutate(userInput);
     } else {
       alert("제목과 본문을 입력하세요 !");
     }
@@ -76,9 +72,13 @@ const CreatePage = () => {
           <S.Lockbox>
             <div>
               <CiLock /> 비밀 문의
-              <input type="checkbox" value={lock} onClick={() => setUserInput((prev) => ({ ...prev, lock: !lock }))} />
+              <input
+                type="checkbox"
+                value={secret}
+                onClick={() => setUserInput((prev) => ({ ...prev, secret: !secret }))}
+              />
             </div>
-            <S.PwdInput name="pwd" type="password" value={pwd} onChange={handleChange} placeholder="비밀번호 입력" />
+            <S.PwdInput name="pwd" type="password" placeholder="비밀번호 입력" />
           </S.Lockbox>
 
           <S.BtnBox>
