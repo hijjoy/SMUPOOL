@@ -47,7 +47,7 @@ const Wrapper = styled.div`
 
   p {
     ${theme.ALIGN.ROW_CENTER};
-    width: 20%;
+    width: 25%;
     padding-left: 15px;
   }
 `;
