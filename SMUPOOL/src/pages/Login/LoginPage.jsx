@@ -1,29 +1,45 @@
 import styled from "styled-components";
-
 import Logo from "../../assets/images/Logo.webp";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../api/login"; // login 함수를 import
+
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [studentId, setStudentId] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const data = await login(studentId, password);
+      console.log("로그인 성공:", data);
+      // 로그인 성공 시 처리 로직
+      navigate("/home");
+    } catch (error) {
+      console.error("로그인 실패:", error);
+      setError(error.message || "로그인 실패");
+    }
+  };
+
   return (
     <Container>
-      <img src={Logo} alt="asdf" />
-
+      <img src={Logo} alt="Logo" />
       <Contents>
         <Title>로그인</Title>
         <Center>
-          <Input type="text" placeholder="학번" />
-          <Input type="password" placeholder="비밀번호" />
+          <Input type="text" placeholder="학번" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
+          <Input
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </Center>
-        <Error> awef</Error>
+        {error && <Error>{error}</Error>}
         <Center>
-          <Btn>로그인</Btn>
-          <Btn
-            onClick={() => {
-              navigate("/sign-up");
-            }}
-          >
-            회원가입
-          </Btn>
+          <LoginBtn onClick={handleLogin}>로그인</LoginBtn>
+          <SignupBtn onClick={() => navigate("/sign-up")}>회원가입</SignupBtn>
         </Center>
       </Contents>
     </Container>
@@ -39,11 +55,15 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #f8fbfd;
 `;
+
 const Title = styled.div`
   font-size: 45px;
   font-weight: 700;
+  padding: 40px;
 `;
+
 const Error = styled.div`
   width: 60%;
   margin: 15px;
@@ -64,21 +84,35 @@ const Contents = styled.div`
 const Input = styled.input`
   border: 1px solid #b0b1b3;
   width: 80%;
-  height: 60px;
-  border-radius: 10px;
-  margin: 15px;
+  height: 45px;
+  border-radius: 5px;
+  margin: 5px;
 `;
-const Btn = styled.button`
+
+const LoginBtn = styled.button`
   width: 100%;
-  height: 60px;
-  border-radius: 23px;
+  height: 50px;
+  border-radius: 15px;
   background-color: #186dec;
   color: white;
   text-align: center;
   border: 1px solid #186dec;
-  font-size: 30px;
+  font-size: 20px;
   margin-bottom: 5px;
 `;
+
+const SignupBtn = styled.button`
+  width: 100%;
+  height: 50px;
+  border-radius: 15px;
+  background-color: white;
+  color: #186dec;
+  text-align: center;
+  border: 1px solid #186dec;
+  font-size: 20px;
+  margin-bottom: 5px;
+`;
+
 const Center = styled.div`
   width: 100%;
   display: flex;
