@@ -23,7 +23,7 @@ export default function SignupPage() {
         navigate("/login");
       }, 3000);
     } catch (error) {
-      console.error("회원가입 실패:", error);
+      console.log("회원가입 실패:", error);
       // 실패 메시지 설정
       setMessage("인증되지 않았습니다.\n샘물 ID/PW를 확인하세요.");
       setMessageType("error");

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:3000", // API 서버의 기본 URL 설정
+  baseURL: "http://localhost:3000/api", // API 서버의 기본 URL 설정
   headers: {
     "Content-Type": "application/json",
   },

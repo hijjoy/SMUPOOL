@@ -9,16 +9,19 @@ const LoginPage = () => {
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 관리하는 state
 
   const handleLogin = async () => {
     try {
       const data = await login(studentId, password);
       console.log("로그인 성공:", data);
       // 로그인 성공 시 처리 로직
+      setIsLoggedIn(true); // 로그인 상태 업데이트
       navigate("/home");
     } catch (error) {
-      console.error("로그인 실패:", error);
+      console.log("로그인 실패:", error);
       setError(error.message || "로그인 실패");
+      setIsLoggedIn(false); // 로그인 상태 업데이트
     }
   };
 
@@ -37,10 +40,14 @@ const LoginPage = () => {
           />
         </Center>
         {error && <Error>{error}</Error>}
-        <Center>
-          <LoginBtn onClick={handleLogin}>로그인</LoginBtn>
-          <SignupBtn onClick={() => navigate("/sign-up")}>회원가입</SignupBtn>
-        </Center>
+        {isLoggedIn ? (
+          <Error>이미 로그인 되셨습니다.</Error>
+        ) : (
+          <Center>
+            <LoginBtn onClick={handleLogin}>로그인</LoginBtn>
+            <SignupBtn onClick={() => navigate("/sign-up")}>회원가입</SignupBtn>
+          </Center>
+        )}
       </Contents>
     </Container>
   );
@@ -51,6 +58,7 @@ export default LoginPage;
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  padding: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,6 +80,7 @@ const Error = styled.div`
   color: #fa1919;
   background-color: #e8eaec;
 `;
+
 const Contents = styled.div`
   width: 40%;
   height: 70%;
@@ -81,6 +90,7 @@ const Contents = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
+
 const Input = styled.input`
   border: 1px solid #b0b1b3;
   width: 80%;
