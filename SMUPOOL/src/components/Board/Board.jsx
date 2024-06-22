@@ -69,7 +69,7 @@ const Board = () => {
             <IoIosArrowBack />
           </button>
           {currentPage}
-          <button onClick={() => setCurrentPage((prev) => prev + 1)}>
+          <button onClick={() => setCurrentPage((prev) => prev + 1)} disabled={data?.length < 8}>
             <IoIosArrowForward />
           </button>
         </S.PageButton>

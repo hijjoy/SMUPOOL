@@ -127,8 +127,10 @@ const PageButton = styled.div`
     background-color: transparent;
     cursor: pointer;
 
-    &:disabled {
+    &:disabled :hover {
+      transform: scale(1);
       cursor: not-allowed;
+      color: inherit;
     }
   }
 `;
