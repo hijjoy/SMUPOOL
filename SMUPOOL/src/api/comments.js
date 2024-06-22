@@ -1,10 +1,12 @@
-import { commentAxios } from "./axios";
+import { commentAxios, postsAxios } from "./axios";
 
-const getComment = async (id) => {
-  const res = await commentAxios(`${id}`);
-  console.log(res);
-
-  return res.json();
+const getComments = async (id) => {
+  try {
+    const res = await postsAxios(`${id}/replies`);
+    return res.data.result;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const postComment = async (id) => {
@@ -13,4 +15,4 @@ const postComment = async (id) => {
   return res.json();
 };
 
-export { getComment, postComment };
+export { getComments, postComment };

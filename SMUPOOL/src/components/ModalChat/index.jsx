@@ -41,11 +41,11 @@ const ModalChat = ({ showModal, onClick }) => {
     setShowChat(true);
   };
 
-  useEffect(() => {
-    socket.on("message", (message) => {
-      setMessageList((prev) => prev.concat(message));
-    });
-  }, []);
+  // useEffect(() => {
+  //   socket.on("message", (message) => {
+  //     setMessageList((prev) => prev.concat(message));
+  //   });
+  // }, []);
 
   const sendMessage = (e) => {
     e.preventDefault();

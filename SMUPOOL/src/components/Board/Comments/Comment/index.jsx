@@ -1,6 +1,5 @@
 import { MdOutlineSubdirectoryArrowRight } from "react-icons/md";
 import { CiLock } from "react-icons/ci";
-
 import * as S from "./Comment.style";
 import Input from "../../Input";
 import { useState } from "react";
@@ -14,23 +13,23 @@ const Comment = ({ com }) => {
   return (
     <S.Container>
       <S.CommentBox>
-        <h5>{com.author}</h5>
+        <h5>202110977 정혜원</h5>
         <div>{com.content}</div>
         <S.CommentBtn>
           <button onClick={handleCreate}>댓글쓰기</button>
-          <p>작성 날짜 :{com.date}</p>
+          <p>작성 날짜 :{com.createdAt.split("T")[0]}</p>
         </S.CommentBtn>
       </S.CommentBox>
-      {com.childrenComment.length !== 0 ? (
+      {/* {com.childrenComment.length !== 0 ? (
         com.childrenComment.map((e, idx) => (
           <div key={e.id}>
             <S.ChildrenCommentWrapper>
               <h4>
                 <MdOutlineSubdirectoryArrowRight />
-                {e.author}
+                202110977 정혜원
               </h4>
               <span>{e.content}</span>
-              <p>작성 날짜 :{e.date}</p>
+              <p>작성 날짜 :{e.createdAt.split("T")[0]}</p>
             </S.ChildrenCommentWrapper>
 
             {com.childrenComment.length - 1 !== idx ? (
@@ -63,7 +62,7 @@ const Comment = ({ com }) => {
             <input type="checkbox" />
           </span>
         </S.ChildrenInputWrapper>
-      )}
+      )} */}
     </S.Container>
   );
 };

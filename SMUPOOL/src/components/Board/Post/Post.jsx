@@ -3,20 +3,20 @@ import Pin from "../../../assets/images/pin.webp";
 import Lock from "../../../assets/images/Lock.webp";
 import { useNavigate } from "react-router-dom";
 
-const Post = ({ post, pin, idx }) => {
-  const { id, title, author, createdAt, see, lock } = post;
+const Post = ({ post }) => {
+  const { id, title, createdAt, views, secret, notification } = post;
   const nav = useNavigate();
   return (
-    <S.Container $pin={pin} onClick={() => nav(`/board/${id}`, { state: { ...post } })}>
-      <S.No>{pin ? <img src={Pin} /> : idx}</S.No>
-      <S.Title $pin={pin}>
+    <S.Container $pin={notification} onClick={() => nav(`/board/${id}`, { state: { ...post } })}>
+      <S.No>{notification ? <img src={Pin} /> : id}</S.No>
+      <S.Title $pin={notification}>
         <span>{title}</span>
-        {lock ? <img src={Lock} /> : null}
+        {secret ? <img src={Lock} /> : null}
       </S.Title>
       <S.Wrapper>
-        <div>{author}</div>
-        <span>{createdAt}</span>
-        <p>{see}</p>
+        <div>202110977 정혜원</div>
+        <span>{createdAt.split("T")[0]}</span>
+        <p>{views}</p>
       </S.Wrapper>
     </S.Container>
   );

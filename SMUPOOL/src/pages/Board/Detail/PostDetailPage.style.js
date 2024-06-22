@@ -30,7 +30,7 @@ const Title = styled.div`
     color: ${theme.COLOR.DARK_BLUE};
     font-weight: 700;
     font-size: 30px;
-    width: 60%;
+    width: 55%;
     overflow-wrap: break-word;
 
     @media ${theme.SCREEN_SIZE.TABLET} {
@@ -55,13 +55,13 @@ const Title = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  height: 100%;
   position: relative;
   display: flex;
   color: #a7a7a7;
   width: 100%;
+  height: 100%;
   font-size: 17px;
-  height: 230px;
+  min-height: 230px;
   border: 1px solid #999;
   box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.15);
   border-radius: 20px;
@@ -71,6 +71,7 @@ const ContentWrapper = styled.div`
 
 const Content = styled.div`
   width: 89%;
+  height: 100%;
 
   @media ${theme.SCREEN_SIZE.TABLET} {
     font-size: 13px;

@@ -1,17 +1,26 @@
 import { postsAxios } from "./axios";
 
-const getPosts = async () => {
-  const res = await postsAxios();
-  console.log(res);
-
-  return res.json();
+const getPosts = async (page, search) => {
+  try {
+    const res = await postsAxios({
+      params: {
+        page: page,
+        search: search,
+      },
+    });
+    return res.data.result;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const getDetailPost = async (id) => {
-  const res = await postsAxios(`${id}`);
-  console.log(res);
-
-  return res.json();
+  try {
+    const res = await postsAxios(`${id}`);
+    return res.data.result;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const createPost = async (postData) => {
