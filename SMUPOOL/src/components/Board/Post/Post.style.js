@@ -24,6 +24,9 @@ const No = styled.div`
     width: 20px;
     height: 20px;
   }
+  @media ${theme.SCREEN_SIZE.TABLET} {
+    font-size: 13px;
+  }
 `;
 
 const Title = styled.div`
@@ -44,6 +47,10 @@ const Title = styled.div`
   img {
     width: 31px;
   }
+
+  @media ${theme.SCREEN_SIZE.TABLET} {
+    font-size: 13px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -55,11 +62,19 @@ const Wrapper = styled.div`
   div {
     ${theme.ALIGN.ROW_CENTER};
     width: 35%;
+
+    @media ${theme.SCREEN_SIZE.TABLET} {
+      text-align: center;
+    }
   }
 
   span {
     ${theme.ALIGN.ROW_CENTER};
     width: 30%;
+
+    @media ${theme.SCREEN_SIZE.TABLET} {
+      width: 40%;
+    }
   }
 
   p {
