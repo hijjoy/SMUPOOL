@@ -17,7 +17,7 @@ const Board = () => {
   const debounceSarch = useDebounce(search, 500);
   const nav = useNavigate();
 
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ["posts", currentPage, debounceSarch],
     queryFn: () => getPosts(currentPage, debounceSarch),
     staleTime: 10 * 1000,

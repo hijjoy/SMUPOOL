@@ -1,5 +1,14 @@
 import { AppLayout, BoardLayout } from "../layout";
-import { MainPage, LoginPage, SignupPage, BoardPage, PostDetailPage, MypagePage, CreatePage } from "../pages";
+import {
+  MainPage,
+  LoginPage,
+  SignupPage,
+  BoardPage,
+  PostDetailPage,
+  MypagePage,
+  CreatePage,
+  NotFoundPage,
+} from "../pages";
 
 const Router = [
   {
@@ -20,6 +29,7 @@ const Router = [
       },
       { path: "my-page/:id", element: <MypagePage /> },
     ],
+    errorElement: <NotFoundPage />,
   },
   {
     path: "/board",
@@ -38,6 +48,7 @@ const Router = [
         element: <CreatePage />,
       },
     ],
+    errorElement: <NotFoundPage />,
   },
 ];
 

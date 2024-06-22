@@ -5,5 +5,6 @@ import LoginPage from "./Login/LoginPage";
 import BoardPage from "./Board/BoardPage";
 import CreatePage from "./Board/Create/CreatePage";
 import PostDetailPage from "./Board/Detail/PostDetailPage";
+import NotFoundPage from "./NotFound/NotFoundPage";
 
-export { MainPage, LoginPage, SignupPage, MypagePage, BoardPage, PostDetailPage, CreatePage };
+export { MainPage, LoginPage, SignupPage, MypagePage, BoardPage, PostDetailPage, CreatePage, NotFoundPage };
