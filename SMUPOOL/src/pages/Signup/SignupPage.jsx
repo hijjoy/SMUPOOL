@@ -1,14 +1,32 @@
 import styled from "styled-components";
 import Logo from "../../assets/images/Logo.webp";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../api/signup";
 import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import signupSchema from "../../schema/signupSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function SignupPage() {
   const navigate = useNavigate();
-  const [studentId, setStudentId] = useState("");
-  const [password, setPassword] = useState("");
+
+  const {
+    handleSubmit,
+    watch,
+    register,
+    formState: { errors },
+  } = useForm({
+    mode: "onBlur",
+    resolver: yupResolver(signupSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      name: "",
+      nickname: "",
+    },
+  });
+
+  const { email, password, name, nickname } = watch();
 
   const { mutate } = useMutation({
     mutationFn: signup,
@@ -22,17 +40,17 @@ export default function SignupPage() {
     },
   });
 
-  const handleSignup = () => {
+  const onSubmit = () => {
     mutate({
-      name: studentId,
-      email: studentId + "@sangmyung.kr",
+      name,
+      email: email + "@sangmyung.kr",
       password,
-      nickname: studentId,
+      nickname,
     });
   };
 
   return (
-    <Container>
+    <Container onSubmit={handleSubmit(onSubmit)}>
       <img src={Logo} alt="Logo" />
       <Contents>
         <Title>
@@ -41,23 +59,24 @@ export default function SignupPage() {
         </Title>
         <Notice>샘물 통합 로그인과 동일합니다.</Notice>
         <Center>
-          <Input type="text" placeholder="학번" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
-          <Input
-            type="password"
-            placeholder="비밀번호"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <Input id="name" {...register("name")} type="text" placeholder="이름" />
+          <ErrorMessage>{errors.name && errors.name.message}</ErrorMessage>
+          <Input id="nickname" {...register("nickname")} type="text" placeholder="닉네임" />
+          <ErrorMessage>{errors.nickname && errors.nickname.message}</ErrorMessage>
+          <Input id="email" {...register("email")} type="text" placeholder="학번" />
+          <ErrorMessage>{errors.email && errors.email.message}</ErrorMessage>
+          <Input id="password" {...register("password")} type="password" placeholder="비밀번호" />
+          <ErrorMessage>{errors.password && errors.password.message}</ErrorMessage>
         </Center>
         <Center>
-          <Btn onClick={handleSignup}>인증</Btn>
+          <Btn>인증</Btn>
         </Center>
       </Contents>
     </Container>
   );
 }
 
-const Container = styled.div`
+const Container = styled.form`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -87,8 +106,8 @@ const Notice = styled.div`
   width: 60%;
   margin: 15px;
   text-align: center;
-  padding: 10px; /* 내부 패딩 추가 */
-  font-size: 10px; /* 글자 크기 조정 */
+  padding: 10px;
+  font-size: 10px;
   background-color: #e8eaec;
 `;
 
@@ -129,14 +148,8 @@ const Center = styled.div`
   align-items: center;
   flex-direction: column;
 `;
-
-const Message = styled.div`
-  width: 60%;
-  margin: 15px;
-  text-align: center;
-  padding: 10px; /* 내부 패딩 추가 */
-  font-size: 10px; /* 글자 크기 조정 */
-  color: ${(props) => (props.type === "success" ? "#186dec" : "#fa1919")};
-  background-color: #e8eaec;
-  white-space: pre-wrap;
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
 `;
