@@ -25,10 +25,10 @@ const CreatePage = () => {
     // files: [],
     secret: false,
     notification: false,
-    // pwd: "",
+    password: "",
   });
 
-  const { title, content, secret } = userInput;
+  const { title, content, secret, password } = userInput;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,7 +77,13 @@ const CreatePage = () => {
                 onClick={() => setUserInput((prev) => ({ ...prev, secret: !secret }))}
               />
             </div>
-            <S.PwdInput name="pwd" type="password" placeholder="비밀번호 입력" />
+            <S.PwdInput
+              name="password"
+              type="password"
+              placeholder="비밀번호 입력"
+              value={password}
+              onChange={handleChange}
+            />
           </S.Lockbox>
 
           <S.BtnBox>

@@ -11,7 +11,7 @@ import queryClient from "../../../api/queryClient.js";
 const EditPage = () => {
   const [files, setFiles] = useState([]);
   const params = useParams();
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   const { data, isPending } = useQuery({
     queryKey: ["posts", { id: params.id }],
@@ -23,13 +23,26 @@ const EditPage = () => {
     content: "",
     // files: [],
     secret: false,
-    notification: false,
+    // notification: false,
     // pwd: "",
   });
 
   const { title, content, secret } = userInput;
 
   let dataContent;
+
+  const { mutate } = useMutation({
+    mutationFn: updatePost,
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: ["posts", { id: params.id }],
+      });
+      navigate(`/board/${params.id}`);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,15 +55,14 @@ const EditPage = () => {
     setFiles((prev) => [...prev, ...fileURLs]);
   };
 
-  const { mutate } = useMutation({
-    mutationFn: updatePost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["posts", { id: params.id }],
-      });
-      nav(`/board/${params.id}`);
-    },
-  });
+  const handleSubmit = () => {
+    if (title.trim() !== "" && content.trim() !== "") {
+      mutate({ id: params.id, editData: userInput });
+    } else {
+      alert("제목과 본문을 입력하세요 !");
+    }
+  };
+
 
   useEffect(() => {
     if (data) {
@@ -58,7 +70,7 @@ const EditPage = () => {
         title: data.title,
         content: data.content,
         secret: data.secret,
-        notification: data.notification,
+        // notification: data.notification,
       });
     }
   }, [data]);
