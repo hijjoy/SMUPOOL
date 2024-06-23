@@ -114,6 +114,7 @@ const LoginBtn = styled.button`
   border: 1px solid #186dec;
   font-size: 20px;
   margin-bottom: 5px;
+  cursor: pointer;
 `;
 
 const SignupBtn = styled.button`
@@ -126,6 +127,7 @@ const SignupBtn = styled.button`
   border: 1px solid #186dec;
   font-size: 20px;
   margin-bottom: 5px;
+  cursor: pointer;
 `;
 
 const Center = styled.div`
