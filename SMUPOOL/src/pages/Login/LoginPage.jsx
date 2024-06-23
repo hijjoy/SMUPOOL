@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../api/login";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,7 +14,13 @@ const LoginPage = () => {
   const { mutate } = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      console.log(data);
+      toast.success("로그인에 성공하였습니다 !", {
+        style: {
+          position: "absolute",
+          bottom: "70px",
+          right: "40px",
+        },
+      });
       localStorage.setItem("accessToken", data.result.token);
       localStorage.setItem("userId", data.result.userId);
       localStorage.setItem("studentId", studentId);
@@ -22,8 +29,13 @@ const LoginPage = () => {
       navigate("/");
     },
     onError: (error) => {
-      error.response && alert(error.response.data.message);
-      console.error(error.response);
+      error.response &&
+        toast.error(error.response.data.message, {
+          style: {
+            color: "#fff",
+            background: "#e05151",
+          },
+        });
     },
   });
 

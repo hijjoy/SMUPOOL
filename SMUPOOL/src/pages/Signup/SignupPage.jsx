@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import signupSchema from "../../schema/signupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "sonner";
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -30,13 +31,18 @@ export default function SignupPage() {
 
   const { mutate } = useMutation({
     mutationFn: signup,
-    onSuccess: (data) => {
-      console.log(data);
-      alert("회원가입이 완료되었습니다.");
+    onSuccess: () => {
+      toast.success("회원가입이 완료되었습니다 !");
       navigate("/login");
     },
     onError: (error) => {
-      console.error(error.response);
+      error.response &&
+        toast.error(error.response.data.message, {
+          style: {
+            color: "#fff",
+            background: "#e05151",
+          },
+        });
     },
   });
 

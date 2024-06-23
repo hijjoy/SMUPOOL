@@ -34,8 +34,6 @@ const PostDetailPage = () => {
     },
   });
 
-  console.log(isError);
-
   const handleDelete = () => {
     mutate(params.id);
   };
