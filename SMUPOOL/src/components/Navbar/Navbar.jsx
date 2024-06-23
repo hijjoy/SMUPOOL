@@ -12,10 +12,11 @@ const Navbar = () => {
   });
 
   const { text, navPath } = path;
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     if (location.pathname === "/board" || location.pathname.startsWith("/my-page")) {
-      setPath({ text: "마이페이지", navPath: "/my-page/id나중에변경" });
+      setPath({ text: "마이페이지", navPath: `/my-page/${userId}` });
     } else {
       setPath({ text: "문의게시판", navPath: "/board" });
     }
@@ -27,7 +28,7 @@ const Navbar = () => {
         <h1> SMUPOOL</h1>
         <span onClick={() => nav(navPath)}>{text}</span>
       </S.Wrapper>
-      <S.MypageWrppaer onClick={() => nav("/my-page/id나중에변경")}>
+      <S.MypageWrppaer onClick={() => nav(`/my-page/${userId}`)}>
         <span>마이페이지</span>
         <img src={Profile} />
       </S.MypageWrppaer>
