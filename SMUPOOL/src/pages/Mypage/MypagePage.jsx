@@ -9,6 +9,7 @@ import use from "../../constants/use";
 import { useMutation } from "@tanstack/react-query";
 import { logout } from "../../api/login";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const MypagePage = () => {
   const navigate = useNavigate();
@@ -20,12 +21,18 @@ const MypagePage = () => {
   const { mutate: logoutMutate } = useMutation({
     mutationFn: logout,
     onSuccess: () => {
-      alert("로그아웃 되셨습니다.");
+      toast.success("로그아웃 되셨습니다.");
       localStorage.clear();
       navigate("/");
     },
     onError: (error) => {
-      console.error(error.response);
+      error.response &&
+        toast.error(error.response.data.message, {
+          style: {
+            color: "#fff",
+            background: "#e05151",
+          },
+        });
     },
   });
 

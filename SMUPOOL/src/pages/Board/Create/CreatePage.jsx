@@ -6,6 +6,7 @@ import SubmitButton from "../../../components/SubmitButton/index";
 import { useMutation } from "@tanstack/react-query";
 import { createPost } from "../../../api/posts";
 import queryClient from "../../../api/queryClient";
+import { toast } from "sonner";
 
 const CreatePage = () => {
   const nav = useNavigate();
@@ -15,7 +16,17 @@ const CreatePage = () => {
     mutationFn: createPost,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
+      toast.success("게시글 작성에 성공하였습니다 !");
       nav("/board");
+    },
+    onError: (error) => {
+      error.response &&
+        toast.error(error.response.data.message, {
+          style: {
+            color: "#fff",
+            background: "#e05151",
+          },
+        });
     },
   });
 
@@ -54,7 +65,12 @@ const CreatePage = () => {
         });
       }
     } else {
-      alert("제목과 본문을 입력하세요 !");
+      toast.error("제목과 본문을 입력하세요 !", {
+        style: {
+          color: "#fff",
+          background: "#e05151",
+        },
+      });
     }
   };
 

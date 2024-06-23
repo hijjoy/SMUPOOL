@@ -7,6 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { getDetailPost, updatePost } from "../../../api/posts.js";
 import LoadingComponent from "../../../components/Loading/index";
 import queryClient from "../../../api/queryClient.js";
+import { toast } from "sonner";
 
 const EditPage = () => {
   const [files, setFiles] = useState([]);
@@ -33,14 +34,21 @@ const EditPage = () => {
 
   const { mutate } = useMutation({
     mutationFn: updatePost,
-    onSuccess: async (data) => {
+    onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: ["posts", { id: params.id }],
       });
-      navigate(`/board/${params.id}`);
+      toast.success("게시글 수정에 성공하였습니다 !");
+      navigate(`/board/${params.id}`, { state: { password: null } });
     },
     onError: (error) => {
-      console.log(error);
+      error.response &&
+        toast.error(error.response.data.message, {
+          style: {
+            color: "#fff",
+            background: "#e05151",
+          },
+        });
     },
   });
 
@@ -59,10 +67,14 @@ const EditPage = () => {
     if (title.trim() !== "" && content.trim() !== "") {
       mutate({ id: params.id, editData: userInput });
     } else {
-      alert("제목과 본문을 입력하세요 !");
+      toast.error("제목과 본문을 입력하세요 !", {
+        style: {
+          color: "#fff",
+          background: "#e05151",
+        },
+      });
     }
   };
-
 
   useEffect(() => {
     if (data) {
@@ -112,7 +124,7 @@ const EditPage = () => {
             </S.Lockbox>
 
             <S.BtnBox>
-              <SubmitButton text="작성" onClick={() => mutate({ id: params.id, editData: userInput })} />
+              <SubmitButton text="작성" onClick={handleSubmit} />
             </S.BtnBox>
           </S.SubmitWrapper>
         </S.Wrapper>
