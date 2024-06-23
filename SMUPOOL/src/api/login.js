@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axiosInstance } from "./axios";
 
 const apiClient = axios.create({
   baseURL: "http://43.202.8.75:8080",
@@ -15,4 +16,9 @@ const login = async ({ email, password }) => {
   return data;
 };
 
-export default login;
+const logout = async () => {
+  const { data } = await axiosInstance.post(`/api/v1/users/logout`);
+  return data;
+};
+
+export { login, logout };

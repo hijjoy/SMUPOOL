@@ -2,32 +2,33 @@ import styled from "styled-components";
 import Logo from "../../assets/images/Logo.webp";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signup } from "../../api/signup"; // signup 함수를 import
+import { signup } from "../../api/signup";
+import { useMutation } from "@tanstack/react-query";
 
 export default function SignupPage() {
   const navigate = useNavigate();
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState(""); // 성공 또는 실패 메시지 유형을 저장
 
-  const handleSignup = async () => {
-    try {
-      const data = await signup(studentId, password);
-      console.log("회원가입 성공:", data);
-      // 성공 메시지 설정
-      setMessage("인증 완료! 가입되었습니다.");
-      setMessageType("success");
-      // 3초 후에 로그인 페이지로 이동
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
-    } catch (error) {
-      console.log("회원가입 실패:", error);
-      // 실패 메시지 설정
-      setMessage("인증되지 않았습니다.\n샘물 ID/PW를 확인하세요.");
-      setMessageType("error");
-    }
+  const { mutate } = useMutation({
+    mutationFn: signup,
+    onSuccess: (data) => {
+      console.log(data);
+      alert("회원가입이 완료되었습니다.");
+      navigate("/");
+    },
+    onError: (error) => {
+      console.error(error.response);
+    },
+  });
+
+  const handleSignup = () => {
+    mutate({
+      name: studentId,
+      email: studentId + "@sangmyung.kr",
+      password,
+      nickname: studentId,
+    });
   };
 
   return (
@@ -48,7 +49,6 @@ export default function SignupPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Center>
-        {message && <Message type={messageType}>{message}</Message>}
         <Center>
           <Btn onClick={handleSignup}>인증</Btn>
         </Center>

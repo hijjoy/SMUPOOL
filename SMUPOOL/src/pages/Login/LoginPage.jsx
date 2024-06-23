@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Logo from "../../assets/images/Logo.webp";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import login from "../../api/login";
+import { login } from "../../api/login";
 import { useMutation } from "@tanstack/react-query";
 
 const LoginPage = () => {
@@ -19,6 +19,7 @@ const LoginPage = () => {
       navigate("/home");
     },
     onError: (error) => {
+      error.response && alert(error.response.data.message);
       console.error(error.response);
     },
   });
