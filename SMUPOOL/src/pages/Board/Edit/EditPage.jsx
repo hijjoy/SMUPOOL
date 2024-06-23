@@ -63,6 +63,7 @@ const EditPage = () => {
     }
   };
 
+
   useEffect(() => {
     if (data) {
       setUserInput({
@@ -111,7 +112,7 @@ const EditPage = () => {
             </S.Lockbox>
 
             <S.BtnBox>
-              <SubmitButton text="작성" onClick={handleSubmit} />
+              <SubmitButton text="작성" onClick={() => mutate({ id: params.id, editData: userInput })} />
             </S.BtnBox>
           </S.SubmitWrapper>
         </S.Wrapper>

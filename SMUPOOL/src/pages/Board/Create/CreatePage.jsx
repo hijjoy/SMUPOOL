@@ -47,8 +47,6 @@ const CreatePage = () => {
     } else {
       alert("제목과 본문을 입력하세요 !");
     }
-
-    console.log(userInput);
   };
 
   return (

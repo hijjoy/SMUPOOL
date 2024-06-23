@@ -1,10 +1,8 @@
 import axios from "axios";
 
-const { VITE_TOKEN } = import.meta.env;
-
 const header = {
   "Content-Type": "application/json",
-  Authorization: `Bearer ${VITE_TOKEN}`,
+  Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
 };
 
 const axiosInstance = axios.create({
