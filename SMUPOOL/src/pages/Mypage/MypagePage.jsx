@@ -21,7 +21,13 @@ const MypagePage = () => {
   const { mutate: logoutMutate } = useMutation({
     mutationFn: logout,
     onSuccess: () => {
-      toast.success("로그아웃 되셨습니다.");
+      toast.success("로그아웃 되셨습니다.", {
+        style: {
+          position: "absolute",
+          bottom: "70px",
+          right: "40px",
+        },
+      });
       localStorage.clear();
       navigate("/");
     },

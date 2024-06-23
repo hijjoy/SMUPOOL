@@ -14,7 +14,13 @@ const LoginPage = () => {
   const { mutate } = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      toast.success("로그인에 성공하였습니다 !");
+      toast.success("로그인에 성공하였습니다 !", {
+        style: {
+          position: "absolute",
+          bottom: "70px",
+          right: "40px",
+        },
+      });
       localStorage.setItem("accessToken", data.result.token);
       localStorage.setItem("userId", data.result.userId);
       localStorage.setItem("studentId", studentId);
