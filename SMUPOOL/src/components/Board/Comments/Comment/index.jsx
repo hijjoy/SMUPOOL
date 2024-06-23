@@ -65,7 +65,7 @@ const Comment = ({ com, refetch }) => {
   return (
     <S.Container>
       <S.CommentBox>
-        <h5>202110977 정혜원</h5>
+        <h5>{com.author.name}</h5>
         <div>{com.content}</div>
         <S.CommentBtn>
           <button onClick={handleCreate}>댓글쓰기</button>

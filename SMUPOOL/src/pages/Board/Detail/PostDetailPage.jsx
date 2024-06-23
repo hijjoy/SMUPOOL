@@ -53,7 +53,7 @@ const PostDetailPage = () => {
         <S.Title>
           <h1>{data.title}</h1>
           <div>
-            <p>작성자 : 202110977 정혜원</p>
+            <p>작성자 : {data.author.name}</p>
             <p>작성 날짜 : {data.createdAt.split("T")[0]}</p>
             <p>조회수: {data.views}</p>
           </div>
