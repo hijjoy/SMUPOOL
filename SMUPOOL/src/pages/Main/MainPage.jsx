@@ -43,7 +43,7 @@ const MainPage = () => {
             <>
               <img src={Profile} alt="profile" />
               <span>
-                {name} {studentId}님 스뮤풀에 오신 것을 환영합니다!
+                {studentId} {name}님 스뮤풀에 오신 것을 환영합니다!
               </span>
             </>
           ) : (
