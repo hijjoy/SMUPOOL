@@ -43,7 +43,16 @@ const CreatePage = () => {
 
   const handleSubmit = () => {
     if (title.trim() !== "" && content.trim() !== "") {
-      mutate(userInput);
+      if (secret) {
+        mutate(userInput);
+      } else {
+        mutate({
+          title: userInput.title,
+          content: userInput.content,
+          secret: userInput.secret,
+          notification: userInput.notification,
+        });
+      }
     } else {
       alert("제목과 본문을 입력하세요 !");
     }
