@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { logout } from "../../api/login";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { removeHeader } from "../../utils/header";
 
 const MypagePage = () => {
   const navigate = useNavigate();
@@ -22,12 +23,15 @@ const MypagePage = () => {
     mutationFn: logout,
     onSuccess: () => {
       toast.success("로그아웃 되셨습니다.", {
+        duration: 1200,
         style: {
           position: "absolute",
           bottom: "70px",
           right: "40px",
         },
       });
+      // localStorage.clear();
+      removeHeader("Authorization");
       localStorage.clear();
       navigate("/");
     },

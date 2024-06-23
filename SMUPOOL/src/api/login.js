@@ -9,7 +9,7 @@ const apiClient = axios.create({
 });
 
 const login = async ({ email, password }) => {
-  const { data } = await apiClient.post(`/api/v1/users/login`, {
+  const { data } = await axiosInstance.post(`/api/v1/users/login`, {
     email,
     password,
   });

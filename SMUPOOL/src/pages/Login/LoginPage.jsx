@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../api/login";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { setHeader } from "../../utils/header";
+import { axiosInstance } from "../../api/axios";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ const LoginPage = () => {
     mutationFn: login,
     onSuccess: (data) => {
       toast.success("로그인에 성공하였습니다 !", {
+        duration: 1200,
         style: {
           position: "absolute",
           bottom: "70px",
@@ -25,6 +28,9 @@ const LoginPage = () => {
       localStorage.setItem("userId", data.result.userId);
       localStorage.setItem("studentId", studentId);
       localStorage.setItem("name", data.result.userName);
+      // axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${data.result.token}`;
+
+      setHeader("Authorization", data.result.token);
 
       navigate("/");
     },

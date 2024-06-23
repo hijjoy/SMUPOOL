@@ -27,6 +27,7 @@ const MainPage = () => {
       nav("/board");
     } else {
       toast.error("로그인을 먼저 해주세요!", {
+        duration: 1200,
         style: {
           color: "#fff",
           background: "#e05151",
