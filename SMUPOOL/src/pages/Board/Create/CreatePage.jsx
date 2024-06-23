@@ -25,10 +25,10 @@ const CreatePage = () => {
     // files: [],
     secret: false,
     notification: false,
-    // pwd: "",
+    password: "",
   });
 
-  const { title, content, secret } = userInput;
+  const { title, content, secret, password } = userInput;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,13 +42,13 @@ const CreatePage = () => {
   };
 
   const handleSubmit = () => {
-    // if (title.trim() !== "" && content.trim() !== "") {
-    //   mutate(userInput);
-    // } else {
-    //   alert("제목과 본문을 입력하세요 !");
-    // }
-    mutate(userInput);
-    console.log("클릭");
+    if (title.trim() !== "" && content.trim() !== "") {
+      mutate(userInput);
+    } else {
+      alert("제목과 본문을 입력하세요 !");
+    }
+
+    console.log(userInput);
   };
 
   return (
@@ -79,21 +79,17 @@ const CreatePage = () => {
                 onClick={() => setUserInput((prev) => ({ ...prev, secret: !secret }))}
               />
             </div>
-            <S.PwdInput name="pwd" type="password" placeholder="비밀번호 입력" />
+            <S.PwdInput
+              name="password"
+              type="password"
+              placeholder="비밀번호 입력"
+              value={password}
+              onChange={handleChange}
+            />
           </S.Lockbox>
 
           <S.BtnBox>
-            <SubmitButton
-              text="작성"
-              onClick={() =>
-                mutate({
-                  title: userInput.title,
-                  content: userInput.content,
-                  secret: false,
-                  notification: true,
-                })
-              }
-            />
+            <SubmitButton text="작성" onClick={handleSubmit} />
           </S.BtnBox>
         </S.SubmitWrapper>
       </S.Wrapper>

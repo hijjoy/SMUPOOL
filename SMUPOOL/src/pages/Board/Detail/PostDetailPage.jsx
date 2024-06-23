@@ -11,10 +11,13 @@ const PostDetailPage = () => {
   const params = useParams();
   const nav = useNavigate();
 
+  const body = { postId: params.id, password: null };
+  console.log(body);
+
   const { data, isPending, isError } = useQuery({
     queryKey: ["posts", { id: params.id }],
-    queryFn: () => getDetailPost(params.id),
-    staleTime: 10 * 1000,
+    queryFn: () => getDetailPost(params.id, body),
+    staleTime: 1000 * 1000,
   });
 
   let content;
@@ -31,7 +34,7 @@ const PostDetailPage = () => {
   });
 
   const handleDelete = () => {
-    mutate(id);
+    mutate(params.id);
   };
 
   if (isPending) {

@@ -14,6 +14,7 @@ const Container = styled.div`
 `;
 
 const CommentBox = styled.div`
+  position: relative;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
   display: flex;
@@ -133,4 +134,11 @@ const CComent = styled.div`
   display: ${(props) => (props.$open ? "block" : "none")};
 `;
 
-export { CommentBox, ChildrenInputWrapper, ChildrenCommentWrapper, Container, CommentBtn, CComent };
+const Deletebtn = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  text-decoration: none !important;
+`;
+
+export { CommentBox, ChildrenInputWrapper, ChildrenCommentWrapper, Container, CommentBtn, CComent, Deletebtn };

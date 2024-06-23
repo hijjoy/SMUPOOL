@@ -20,4 +20,13 @@ const postComments = async ({ content, secret, postId, parentId }) => {
   return res;
 };
 
-export { getComments, postComments };
+const DeteleComment = async (id) => {
+  try {
+    const res = await axiosInstance.delete(`/api/v1/replies/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getComments, postComments, DeteleComment };

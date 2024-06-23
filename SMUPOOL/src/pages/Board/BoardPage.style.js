@@ -22,6 +22,12 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   height: 82%;
-  width: 100%;
+  /* max-width: 1000px; */
+  width: 1000px;
+  overflow-x: auto;
+
+  @media ${theme.SCREEN_SIZE.TABLET} {
+    width: 700px;
+  }
 `;
 export { Container, Wrapper };
