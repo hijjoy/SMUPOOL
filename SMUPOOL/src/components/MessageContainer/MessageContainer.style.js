@@ -25,7 +25,12 @@ const MyMsgContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
   margin-right: 10px;
+
+  span {
+    font-size: 10px;
+  }
 `;
 
 const MyMsg = styled.div`
@@ -43,6 +48,10 @@ const YourMsgContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   margin-right: 10px;
+
+  span {
+    font-size: 10px;
+  }
 `;
 
 const yourMsg = styled.div`
@@ -52,6 +61,7 @@ const yourMsg = styled.div`
   border-top-right-radius: 22px;
   border-bottom-right-radius: 22px;
   color: lightgray;
+  margin: 10px 0;
 
   div {
     background-color: #fff;
@@ -69,4 +79,25 @@ const yourMsg = styled.div`
   }
 `;
 
-export { Container, MyMsgContainer, YourMsgContainer, WelcomeMsg, MyMsg, yourMsg };
+const MyMessageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
+const YourMessageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export {
+  Container,
+  MyMsgContainer,
+  YourMsgContainer,
+  WelcomeMsg,
+  MyMsg,
+  yourMsg,
+  MyMessageContainer,
+  YourMessageContainer,
+};

@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./ModalChat.style";
 import ModalPortal from "../Portal/Portal";
 import { IoArrowDownSharp } from "react-icons/io5";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import MessageContainer from "../MessageContainer/MessageContainer";
-import { useMutation } from "@tanstack/react-query";
-import { getChatHistory } from "../../api/chat";
-import useStomp from "../../hooks/useStomp";
 import { Stomp } from "@stomp/stompjs";
 import axios from "axios";
 
-const ModalChat = ({ showModal, onClick, roomId, userId }) => {
-  const [message, setMessage] = useState([]);
+const ModalChat = ({ showModal, setShowModal }) => {
+  const [message, setMessage] = useState("");
   const [stompClient, setStompClient] = useState(null);
   const [messageList, setMessageList] = useState([]);
+  console.log(setShowModal);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -64,9 +62,9 @@ const ModalChat = ({ showModal, onClick, roomId, userId }) => {
   };
 
   const sendMessage = () => {
-    if (stompClient && message.trim() !== "") {
+    if (stompClient && message?.trim() !== "") {
       const chatMessage = JSON.stringify({
-        sender: 13,
+        sender: 29,
         content: message,
         chatroom: 6,
       });
@@ -92,8 +90,8 @@ const ModalChat = ({ showModal, onClick, roomId, userId }) => {
   return (
     <ModalPortal>
       <S.Container $showModal={showModal}>
-        <S.CloseModal onClick={onClick}>
-          <IoArrowDownSharp />
+        <S.CloseModal onClick={() => setShowModal(false)}>
+          <IoArrowDownSharp onClick={() => setShowModal(false)} />
         </S.CloseModal>
 
         <S.Wrapper>
