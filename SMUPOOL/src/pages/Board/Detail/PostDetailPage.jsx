@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Comments from "../../../components/Board/Comments";
 import * as S from "./PostDetailPage.style";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -11,13 +11,14 @@ const PostDetailPage = () => {
   const params = useParams();
   const nav = useNavigate();
 
-  const body = { postId: params.id, password: null };
-  console.log(body);
+  const location = useLocation();
+
+  const body = { postId: params.id, password: location.state.password };
 
   const { data, isPending, isError } = useQuery({
     queryKey: ["posts", { id: params.id }],
     queryFn: () => getDetailPost(params.id, body),
-    staleTime: 1000 * 1000,
+    staleTime: 10 * 60 * 1000,
   });
 
   let content;
@@ -33,6 +34,8 @@ const PostDetailPage = () => {
     },
   });
 
+  console.log(isError);
+
   const handleDelete = () => {
     mutate(params.id);
   };
@@ -42,6 +45,7 @@ const PostDetailPage = () => {
   }
 
   if (isError) {
+    nav("/board");
     content = <ErrorComponent />;
   }
 
