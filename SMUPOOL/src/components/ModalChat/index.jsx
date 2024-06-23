@@ -3,56 +3,90 @@ import * as S from "./ModalChat.style";
 import ModalPortal from "../Portal/Portal";
 import { IoArrowDownSharp } from "react-icons/io5";
 import { FaArrowAltCircleUp } from "react-icons/fa";
-import Button from "../Button";
-import theme from "../../styles/theme";
-import useForm from "../../hooks/useForm";
-import { validateUser } from "../../utils/validate";
-import socket from "../../api/server";
 import MessageContainer from "../MessageContainer/MessageContainer";
+import { useMutation } from "@tanstack/react-query";
+import { getChatHistory } from "../../api/chat";
+import useStomp from "../../hooks/useStomp";
+import { Stomp } from "@stomp/stompjs";
+import axios from "axios";
 
-const ModalChat = ({ showModal, onClick }) => {
-  const [person, setPerson] = useState(null);
-  const [showChat, setShowChat] = useState(false);
-  const [message, setMessage] = useState("");
+const ModalChat = ({ showModal, onClick, roomId, userId }) => {
+  const [message, setMessage] = useState([]);
+  const [stompClient, setStompClient] = useState(null);
   const [messageList, setMessageList] = useState([]);
 
-  const user = useForm({
-    initialValue: {
-      name: "",
-      phoneNum: "",
-    },
-    validate: validateUser,
-  });
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const socket = new WebSocket("ws://43.202.8.75:8080/chat");
+    const stompClient = Stomp.over(socket);
 
-  const isFormValid = !user.errors.name && !user.errors.phoneNum;
+    const sd = stompClient.connect(
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      (frame) => {
+        console.log("Connected" + frame);
+        stompClient.subscribe("/topic/public", (messageOutput) => {
+          console.log(messageOutput.body);
+          showMessage(JSON.parse(messageOutput.body));
+        });
+      },
+    );
+    console.log(sd);
+    setStompClient(stompClient);
 
-  console.log(user.values.name);
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    socket.emit("login", [user.values.name, user.values.phoneNum], (res) => {
-      console.log(res);
-      if (res?.ok) {
-        setPerson(res.data);
-        setShowChat(true);
+    return () => {
+      if (stompClient) {
+        stompClient.disconnect();
       }
-    });
-    setShowChat(true);
+    };
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    axios
+      .get("http://43.202.8.75:8080/chat/history/6", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setMessage(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const showMessage = (message) => {
+    setMessageList((prevMessages) => [...prevMessages, message]);
   };
 
-  // useEffect(() => {
-  //   socket.on("message", (message) => {
-  //     setMessageList((prev) => prev.concat(message));
-  //   });
-  // }, []);
+  const sendMessage = () => {
+    if (stompClient && message.trim() !== "") {
+      const chatMessage = JSON.stringify({
+        sender: 13,
+        content: message,
+        chatroom: 6,
+      });
 
-  const sendMessage = (e) => {
-    e.preventDefault();
-    socket.emit("sendMessage", message, (res) => {
-      console.log("sendMessage response", res);
+      const token = localStorage.getItem("accessToken");
+      console.log(chatMessage);
+      stompClient.send(
+        "/app/chat.message",
+        {
+          Authorization: `Bearer ${token}`,
+        },
+        chatMessage,
+      );
       setMessage("");
-    });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendMessage();
   };
 
   return (
@@ -61,46 +95,22 @@ const ModalChat = ({ showModal, onClick }) => {
         <S.CloseModal onClick={onClick}>
           <IoArrowDownSharp />
         </S.CloseModal>
-        {showChat ? (
-          <S.Wrapper>
-            <S.ChatWrapper>
-              <MessageContainer messageList={messageList} user={person} />
 
-              <S.InputForm onSubmit={sendMessage}>
-                <input
-                  type="text"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="실시간 상담 내용을 입력해 주세요. 실시간 상담 시간: 평일 9시~18시"
-                />
-                <FaArrowAltCircleUp onClick={sendMessage} />
-              </S.InputForm>
-            </S.ChatWrapper>
-          </S.Wrapper>
-        ) : (
-          <S.LoginWrapper>
-            <span>
-              슴우풀 실시간 상담소입니다. <br />
-              실시간 상담 시간은 평일 9시부터 18시까지입니다.
-            </span>
-            <S.FormWrapper onSubmit={onSubmit}>
-              <label htmlFor="name">성함을 입력해 주세요.</label>
-              <input id="name" name="name" {...user.getTextInputProps("name")} />
-              {user.errors.name && user.touched.name && <p>{user.errors.name}</p>}
-              <label htmlFor="phoneNum">전화번호를 입력해 주세요.</label>
-              <input id="phoneNum" name="phoneNum" {...user.getPhoneNumInputProps("phoneNum")} maxLength={13} />
-              {user.errors.phoneNum && user.touched.phoneNum && <p>{user.errors.phoneNum}</p>}
-              <Button
-                bgcolor={isFormValid ? theme.COLOR.MAIN : "#D9D9D9"}
-                color="#fff"
-                text="상담 시작하기"
-                disable={!isFormValid}
-                width="400px"
-                onClick={onSubmit}
+        <S.Wrapper>
+          <S.ChatWrapper>
+            <MessageContainer messageList={messageList} />
+
+            <S.InputForm onSubmit={handleSubmit}>
+              <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="실시간 상담 내용을 입력해 주세요. 실시간 상담 시간: 평일 9시~18시"
               />
-            </S.FormWrapper>
-          </S.LoginWrapper>
-        )}
+              <FaArrowAltCircleUp onClick={sendMessage} />
+            </S.InputForm>
+          </S.ChatWrapper>
+        </S.Wrapper>
       </S.Container>
     </ModalPortal>
   );

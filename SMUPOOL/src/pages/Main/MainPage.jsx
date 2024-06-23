@@ -9,10 +9,13 @@ import { RiSendPlaneFill } from "react-icons/ri";
 import { AiFillMessage } from "react-icons/ai";
 import theme from "../../styles/theme";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalChat from "../../components/ModalChat";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { useMutation } from "@tanstack/react-query";
+import { createChatRoom, enterChatRoom } from "../../api/chat";
+import useStomp from "../../hooks/useStomp";
 
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -20,6 +23,7 @@ const MainPage = () => {
   const nav = useNavigate();
   const studentId = localStorage.getItem("studentId");
   const name = localStorage.getItem("name");
+  const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("accessToken");
 
   const handleIntoBoard = () => {
@@ -80,20 +84,23 @@ const MainPage = () => {
           width="185px"
         />
         <Button
+          onClick={() => setShowModal((prev) => !prev)}
           text="실시간 상담"
           svg={<AiFillMessage color={theme.COLOR.MAIN} />}
-          onClick={() => setShowModal(true)}
           width="185px"
         />
       </S.ButtonWrapper>
+      <ModalChat showModal={showModal} />
 
-      <ModalChat
+      {/* <ModalChat
         showModal={showModal}
         onClick={() => {
           setShowModal((prev) => !prev);
           location.reload();
         }}
-      />
+        roomId={data?.id}
+        userId={userId}
+      /> */}
     </S.Contaienr>
   );
 };
