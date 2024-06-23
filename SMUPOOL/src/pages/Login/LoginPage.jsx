@@ -2,27 +2,32 @@ import styled from "styled-components";
 import Logo from "../../assets/images/Logo.webp";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/login"; // login 함수를 import
+import login from "../../api/login";
+import { useMutation } from "@tanstack/react-query";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 관리하는 state
 
-  const handleLogin = async () => {
-    try {
-      const data = await login(studentId, password);
-      console.log("로그인 성공:", data);
-      // 로그인 성공 시 처리 로직
-      setIsLoggedIn(true); // 로그인 상태 업데이트
+  const { mutate } = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      console.log(data);
+      localStorage.setItem("accessToken", data.result.token);
+      localStorage.setItem("userId", data.result.userId);
       navigate("/home");
-    } catch (error) {
-      console.log("로그인 실패:", error);
-      setError(error.message || "로그인 실패");
-      setIsLoggedIn(false); // 로그인 상태 업데이트
-    }
+    },
+    onError: (error) => {
+      console.error(error.response);
+    },
+  });
+
+  const handleLogin = () => {
+    mutate({
+      email: studentId + "@sangmyung.kr",
+      password: password,
+    });
   };
 
   return (
@@ -39,15 +44,11 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Center>
-        {error && <Error>{error}</Error>}
-        {isLoggedIn ? (
-          <Error>이미 로그인 되셨습니다.</Error>
-        ) : (
-          <Center>
-            <LoginBtn onClick={handleLogin}>로그인</LoginBtn>
-            <SignupBtn onClick={() => navigate("/sign-up")}>회원가입</SignupBtn>
-          </Center>
-        )}
+
+        <Center>
+          <LoginBtn onClick={handleLogin}>로그인</LoginBtn>
+          <SignupBtn onClick={() => navigate("/sign-up")}>회원가입</SignupBtn>
+        </Center>
       </Contents>
     </Container>
   );
