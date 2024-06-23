@@ -1,10 +1,10 @@
 import * as S from "./Input.style";
 
-const Input = ({ comment }) => {
+const Input = ({ comment, value, onChange, onSubmit }) => {
   return (
     <S.Container $comment={comment}>
-      <input type="text" />
-      <button>등록</button>
+      <input type="text" value={value} onChange={onChange} />
+      <button onClick={onSubmit}>등록</button>
     </S.Container>
   );
 };

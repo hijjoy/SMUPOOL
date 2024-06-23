@@ -1,68 +1,74 @@
-import { MdOutlineSubdirectoryArrowRight } from "react-icons/md";
 import { CiLock } from "react-icons/ci";
 import * as S from "./Comment.style";
 import Input from "../../Input";
 import { useState } from "react";
+import Recomments from "../recomments";
+import { useMutation } from "@tanstack/react-query";
+import { postComments } from "../../../../api/comments";
+import { useParams } from "react-router-dom";
 
-const Comment = ({ com }) => {
+const Comment = ({ com, refetch }) => {
+  const params = useParams();
   const [open, setOpen] = useState(false);
+  const [comment, setComment] = useState("");
+  const [anonymous, setAnonymous] = useState(false);
 
   const handleCreate = () => {
     setOpen((prev) => !prev);
   };
+
+  const { mutate } = useMutation({
+    mutationFn: postComments,
+    onSuccess: () => {
+      refetch();
+      setComment("");
+      setAnonymous(false);
+    },
+    onError: (error) => {
+      console.error(error.response);
+      alert("댓글 업로드 실패");
+    },
+  });
+
+  console.log(com);
+
+  const handleSubmitComment = (e) => {
+    e.preventDefault();
+    if (!comment.trim()) {
+      alert("댓글을 입력해주세요.");
+      return;
+    }
+    mutate({
+      content: comment,
+      secret: anonymous,
+      postId: params.id,
+      parentId: com.id,
+    });
+  };
+
   return (
     <S.Container>
-      <S.CommentBox>
-        <h5>202110977 정혜원</h5>
-        <div>{com.content}</div>
-        <S.CommentBtn>
-          <button onClick={handleCreate}>댓글쓰기</button>
-          <p>작성 날짜 :{com.createdAt.split("T")[0]}</p>
-        </S.CommentBtn>
-      </S.CommentBox>
-      {/* {com.childrenComment.length !== 0 ? (
-        com.childrenComment.map((e, idx) => (
-          <div key={e.id}>
-            <S.ChildrenCommentWrapper>
-              <h4>
-                <MdOutlineSubdirectoryArrowRight />
-                202110977 정혜원
-              </h4>
-              <span>{e.content}</span>
-              <p>작성 날짜 :{e.createdAt.split("T")[0]}</p>
-            </S.ChildrenCommentWrapper>
-
-            {com.childrenComment.length - 1 !== idx ? (
-              <hr />
-            ) : (
-              <S.CComent $open={open}>
-                <hr />
-                <S.ChildrenInputWrapper $open={open}>
-                  <div>
-                    <MdOutlineSubdirectoryArrowRight />
-                    <Input comment={true} />
-                  </div>
-                  <span>
-                    <CiLock /> 비밀댓글
-                    <input type="checkbox" />
-                  </span>
-                </S.ChildrenInputWrapper>
-              </S.CComent>
-            )}
-          </div>
-        ))
+      {com.reply ? (
+        <Recomments com={com} />
       ) : (
-        <S.ChildrenInputWrapper $open={open}>
-          <div>
-            <MdOutlineSubdirectoryArrowRight />
-            <Input comment={true} />
-          </div>
-          <span>
-            <CiLock /> 비밀댓글
-            <input type="checkbox" />
-          </span>
-        </S.ChildrenInputWrapper>
-      )} */}
+        <S.CommentBox>
+          <h5>202110977 정혜원</h5>
+          <div>{com.content}</div>
+          <S.CommentBtn>
+            <button onClick={handleCreate}>댓글쓰기</button>
+            <p>작성 날짜 :{com.createdAt.split("T")[0]}</p>
+          </S.CommentBtn>
+          {open && (
+            <div>
+              <div>
+                <CiLock /> 비밀댓글
+                <input type="checkbox" checked={anonymous} onChange={(e) => setAnonymous(e.target.checked)} />
+              </div>
+              <Input value={comment} onChange={(e) => setComment(e.target.value)} onSubmit={handleSubmitComment} />
+            </div>
+          )}
+        </S.CommentBox>
+      )}
     </S.Container>
   );
 };
