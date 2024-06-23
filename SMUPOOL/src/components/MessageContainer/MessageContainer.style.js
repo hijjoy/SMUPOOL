@@ -21,28 +21,37 @@ const WelcomeMsg = styled.div`
   }
 `;
 
-const MyMsg = styled.div`
+const MyMsgContainer = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: flex-end;
-  margin-bottom: 5px;
-  margin-right: 25px;
+  margin-right: 10px;
+`;
 
-  div {
-    background-color: #abd7ff;
-    box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 8px;
-    max-width: 200px;
-    font-size: 12px;
-  }
+const MyMsg = styled.div`
+  background-color: skyblue;
+  padding: 12px;
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  border-bottom-left-radius: 22px;
+  color: black;
+  margin: 10px 0;
+`;
+
+const YourMsgContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-right: 10px;
 `;
 
 const yourMsg = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 5px;
-  margin-left: 25px;
-  align-items: center;
+  background-color: gray;
+  padding: 12px;
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  border-bottom-right-radius: 22px;
+  color: lightgray;
 
   div {
     background-color: #fff;
@@ -60,4 +69,4 @@ const yourMsg = styled.div`
   }
 `;
 
-export { Container, WelcomeMsg, MyMsg, yourMsg };
+export { Container, MyMsgContainer, YourMsgContainer, WelcomeMsg, MyMsg, yourMsg };
