@@ -30,8 +30,6 @@ const Comment = ({ com, refetch }) => {
     },
   });
 
-  console.log(com);
-
   const handleSubmitComment = (e) => {
     e.preventDefault();
     if (!comment.trim()) {
@@ -49,7 +47,9 @@ const Comment = ({ com, refetch }) => {
   return (
     <S.Container>
       {com.reply ? (
-        <Recomments com={com} />
+        <>
+          <Recomments com={com} />
+        </>
       ) : (
         <S.CommentBox>
           <h5>202110977 정혜원</h5>
