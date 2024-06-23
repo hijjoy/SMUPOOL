@@ -32,4 +32,14 @@ const deleteUser = async (userId) => {
   }
 };
 
-export { login, logout, userPatch, deleteUser };
+const getProfile = async () => {
+  try {
+    const res = await axiosInstance(`api/v1/users/profile`);
+    console.log(res);
+    return res.data.result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { login, logout, userPatch, deleteUser, getProfile };
