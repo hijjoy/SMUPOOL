@@ -144,6 +144,24 @@ const Profile = styled.div`
     font-weight: 500;
     font-size: 13px;
   }
+
+  a {
+    font-size: 13px;
+    ${theme.ALIGN.ROW_CENTER};
+    height: 30px;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgba(232, 234, 236, 0.57);
+    z-index: 999;
+    text-decoration: none;
+    color: ${theme.COLOR.DARK_BLUE};
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(0.98);
+    }
+  }
 `;
 
 export { Contaienr, ImgWrapper, TextWrapper, Hand, Portal, BigPortal, MiniStar, Star, ButtonWrapper, Profile };
