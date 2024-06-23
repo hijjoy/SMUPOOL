@@ -6,12 +6,32 @@ import { SlArrowDown } from "react-icons/sl";
 import { useState } from "react";
 import info from "../../constants/PersonalInfo";
 import use from "../../constants/use";
+import { useMutation } from "@tanstack/react-query";
+import { logout } from "../../api/login";
+import { useNavigate } from "react-router-dom";
 
 const MypagePage = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState({
     info: false,
     use: false,
   });
+
+  const { mutate: logoutMutate } = useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      alert("로그아웃 되셨습니다.");
+      localStorage.clear();
+      navigate("/");
+    },
+    onError: (error) => {
+      console.error(error.response);
+    },
+  });
+
+  const handleLogout = () => {
+    logoutMutate({});
+  };
 
   return (
     <S.Container>
@@ -27,7 +47,7 @@ const MypagePage = () => {
             </S.InfoText>
           </S.UserInfo>
           <S.ButtonWrapper>
-            <S.Button>로그아웃</S.Button>
+            <S.Button onClick={handleLogout}>로그아웃</S.Button>
             <S.Button>회원탈퇴</S.Button>
           </S.ButtonWrapper>
         </S.UserWrapper>
