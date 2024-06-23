@@ -16,7 +16,10 @@ const LoginPage = () => {
       console.log(data);
       localStorage.setItem("accessToken", data.result.token);
       localStorage.setItem("userId", data.result.userId);
-      navigate("/home");
+      localStorage.setItem("studentId", studentId);
+      localStorage.setItem("name", data.result.userName);
+
+      navigate("/");
     },
     onError: (error) => {
       error.response && alert(error.response.data.message);

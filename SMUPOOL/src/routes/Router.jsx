@@ -18,11 +18,11 @@ const Router = [
     children: [
       {
         index: true,
-        element: <LoginPage />,
+        element: <MainPage />,
       },
       {
-        path: "home",
-        element: <MainPage />,
+        path: "login",
+        element: <LoginPage />,
       },
       {
         path: "sign-up",

@@ -8,7 +8,7 @@ import Profile from "../../assets/images/mainProfile.png";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { AiFillMessage } from "react-icons/ai";
 import theme from "../../styles/theme";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ModalChat from "../../components/ModalChat";
 import { motion } from "framer-motion";
@@ -17,7 +17,18 @@ const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   const nav = useNavigate();
-  const nickname = "24학번 김슴우";
+  const studentId = localStorage.getItem("studentId");
+  const name = localStorage.getItem("name");
+  const token = localStorage.getItem("accessToken");
+
+  const handleIntoBoard = () => {
+    if (studentId) {
+      nav("/board");
+    } else {
+      alert("로그인을 먼저 해주세요!");
+      nav("/login");
+    }
+  };
 
   return (
     <S.Contaienr>
@@ -28,8 +39,16 @@ const MainPage = () => {
         className="profile"
       >
         <S.Profile>
-          <img src={Profile} alt="profile" />
-          <span>{nickname}님 스뮤풀에 오신 것을 환영합니다!</span>
+          {token ? (
+            <>
+              <img src={Profile} alt="profile" />
+              <span>
+                {name} {studentId}님 스뮤풀에 오신 것을 환영합니다!
+              </span>
+            </>
+          ) : (
+            <Link to="/login">로그인</Link>
+          )}
         </S.Profile>
       </motion.div>
       <S.ImgWrapper>
@@ -51,7 +70,7 @@ const MainPage = () => {
           bgcolor={theme.COLOR.MAIN}
           color="#fff"
           svg={<RiSendPlaneFill />}
-          onClick={() => nav("/board")}
+          onClick={handleIntoBoard}
           width="185px"
         />
         <Button

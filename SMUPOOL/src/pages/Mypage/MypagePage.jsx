@@ -29,6 +29,9 @@ const MypagePage = () => {
     },
   });
 
+  const studentId = localStorage.getItem("studentId");
+  const name = localStorage.getItem("name");
+
   const handleLogout = () => {
     logoutMutate({});
   };
@@ -42,7 +45,9 @@ const MypagePage = () => {
             <img src={Profile} />
             <S.InfoText>
               <h4>내정보</h4>
-              <p>24학번 김슴우님</p>
+              <p>
+                {studentId.substring(2, 4)}학번 {name}님
+              </p>
               <p>컴퓨터과학전공 재학</p>
             </S.InfoText>
           </S.UserInfo>
