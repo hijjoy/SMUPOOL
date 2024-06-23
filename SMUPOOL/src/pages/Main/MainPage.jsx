@@ -9,13 +9,10 @@ import { RiSendPlaneFill } from "react-icons/ri";
 import { AiFillMessage } from "react-icons/ai";
 import theme from "../../styles/theme";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalChat from "../../components/ModalChat";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { useMutation } from "@tanstack/react-query";
-import { createChatRoom, enterChatRoom } from "../../api/chat";
-import useStomp from "../../hooks/useStomp";
 
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -91,7 +88,7 @@ const MainPage = () => {
           width="185px"
         />
       </S.ButtonWrapper>
-      <ModalChat showModal={showModal} />
+      <ModalChat showModal={showModal} setShowModal={setShowModal} />
 
       {/* <ModalChat
         showModal={showModal}
