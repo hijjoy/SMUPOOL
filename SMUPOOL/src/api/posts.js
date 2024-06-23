@@ -43,9 +43,16 @@ const delectPost = async (id) => {
   }
 };
 
-const updatePost = async (id, editData) => {
-  const res = await axiosInstance.patch(`/api/v1/posts/${id}`, editData);
-  console.log(res);
+const updatePost = async ({ id, editData }) => {
+  console.log(id, editData);
+  try {
+    console.log(id, editData);
+    const res = await axiosInstance.patch(`/api/v1/posts/${id}`, editData);
+    return res;
+    return id;
+  } catch (error) {
+    // console.log(error);
+  }
 };
 
 export { getPosts, getDetailPost, createPost, delectPost, updatePost };

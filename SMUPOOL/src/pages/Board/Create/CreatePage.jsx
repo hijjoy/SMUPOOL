@@ -42,13 +42,11 @@ const CreatePage = () => {
   };
 
   const handleSubmit = () => {
-    // if (title.trim() !== "" && content.trim() !== "") {
-    //   mutate(userInput);
-    // } else {
-    //   alert("제목과 본문을 입력하세요 !");
-    // }
-    mutate(userInput);
-    console.log("클릭");
+    if (title.trim() !== "" && content.trim() !== "") {
+      mutate(userInput);
+    } else {
+      alert("제목과 본문을 입력하세요 !");
+    }
   };
 
   return (
@@ -83,17 +81,7 @@ const CreatePage = () => {
           </S.Lockbox>
 
           <S.BtnBox>
-            <SubmitButton
-              text="작성"
-              onClick={() =>
-                mutate({
-                  title: userInput.title,
-                  content: userInput.content,
-                  secret: false,
-                  notification: true,
-                })
-              }
-            />
+            <SubmitButton text="작성" onClick={handleSubmit} />
           </S.BtnBox>
         </S.SubmitWrapper>
       </S.Wrapper>

@@ -1,15 +1,17 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../Create/CreatePage.style";
 import { useEffect, useState } from "react";
 import { CiLock } from "react-icons/ci";
 import SubmitButton from "../../../components/SubmitButton";
-import { useQuery } from "@tanstack/react-query";
-import { getDetailPost } from "../../../api/posts.js";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getDetailPost, updatePost } from "../../../api/posts.js";
 import LoadingComponent from "../../../components/Loading/index";
+import queryClient from "../../../api/queryClient.js";
 
 const EditPage = () => {
   const [files, setFiles] = useState([]);
   const params = useParams();
+  const nav = useNavigate();
 
   const { data, isPending } = useQuery({
     queryKey: ["posts", { id: params.id }],
@@ -40,15 +42,15 @@ const EditPage = () => {
     setFiles((prev) => [...prev, ...fileURLs]);
   };
 
-  const handleSubmit = () => {
-    // if (title.trim() !== "" && content.trim() !== "") {
-    //   mutate(userInput);
-    // } else {
-    //   alert("제목과 본문을 입력하세요 !");
-    // }
-    // mutate(userInput);
-    console.log(userInput);
-  };
+  const { mutate } = useMutation({
+    mutationFn: updatePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["posts", { id: params.id }],
+      });
+      nav(`/board/${params.id}`);
+    },
+  });
 
   useEffect(() => {
     if (data) {
@@ -98,7 +100,7 @@ const EditPage = () => {
             </S.Lockbox>
 
             <S.BtnBox>
-              <SubmitButton text="작성" onClick={handleSubmit} />
+              <SubmitButton text="작성" onClick={() => mutate({ id: params.id, editData: userInput })} />
             </S.BtnBox>
           </S.SubmitWrapper>
         </S.Wrapper>

@@ -31,7 +31,7 @@ const PostDetailPage = () => {
   });
 
   const handleDelete = () => {
-    mutate(id);
+    mutate(params.id);
   };
 
   if (isPending) {
