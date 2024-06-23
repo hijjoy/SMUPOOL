@@ -23,6 +23,9 @@ const getDetailPost = async (id, body) => {
     console.log(res);
     return res.data.result;
   } catch (error) {
+    if (error.response && error.response.status === 400) {
+      throw Error("비밀번호를 잘못 입력했습니다");
+    }
     console.log(error);
   }
 };
