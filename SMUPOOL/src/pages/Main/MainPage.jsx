@@ -21,6 +21,15 @@ const MainPage = () => {
   const name = localStorage.getItem("name");
   const token = localStorage.getItem("accessToken");
 
+  const handleIntoBoard = () => {
+    if (studentId) {
+      nav("/board");
+    } else {
+      alert("로그인을 먼저 해주세요!");
+      nav("/login");
+    }
+  };
+
   return (
     <S.Contaienr>
       <motion.div
@@ -61,7 +70,7 @@ const MainPage = () => {
           bgcolor={theme.COLOR.MAIN}
           color="#fff"
           svg={<RiSendPlaneFill />}
-          onClick={() => nav("/board")}
+          onClick={handleIntoBoard}
           width="185px"
         />
         <Button
