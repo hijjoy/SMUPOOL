@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Comments from "../../../components/Board/Comments";
 import * as S from "./PostDetailPage.style";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -19,20 +19,20 @@ const PostDetailPage = () => {
 
   let content;
 
-  // const { mutate } = useMutation({
-  //   mutationFn: delectPost,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({
-  //       queryKey: ["posts"],
-  //       refetchType: "none",
-  //     });
-  //     nav("/board");
-  //   },
-  // });
+  const { mutate } = useMutation({
+    mutationFn: delectPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["posts"],
+        refetchType: "none",
+      });
+      nav("/board");
+    },
+  });
 
-  // const handleDelete = () => {
-  //   mutate(id);
-  // };
+  const handleDelete = () => {
+    mutate(id);
+  };
 
   if (isPending) {
     content = <LoadingComponent />;
@@ -56,8 +56,8 @@ const PostDetailPage = () => {
         <S.ContentWrapper>
           <S.Content>{data.content}</S.Content>
           <S.BtnBox>
-            <button>수정</button>
-            <button>삭제</button>
+            <button onClick={() => nav(`/board/edit/${params.id}`)}>수정</button>
+            <button onClick={handleDelete}>삭제</button>
           </S.BtnBox>
           <S.BtnBox2>
             <button>신고</button>

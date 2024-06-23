@@ -1,18 +1,12 @@
-import { commentAxios, postsAxios } from "./axios";
+import { axiosInstance } from "./axios";
 
 const getComments = async (id) => {
   try {
-    const res = await postsAxios(`${id}/replies`);
+    const res = await axiosInstance.get(`/api/v1/posts/${id}/replies`);
     return res.data.result;
   } catch (error) {
     console.log(error);
   }
 };
 
-const postComment = async (id) => {
-  const res = await commentAxios.post(`${id}`);
-  console.log(res);
-  return res.json();
-};
-
-export { getComments, postComment };
+export { getComments };

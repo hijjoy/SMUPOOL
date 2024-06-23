@@ -6,7 +6,6 @@ import SubmitButton from "../../../components/SubmitButton/index";
 import { useMutation } from "@tanstack/react-query";
 import { createPost } from "../../../api/posts";
 import queryClient from "../../../api/queryClient";
-import today from "../../../utils/today";
 
 const CreatePage = () => {
   const nav = useNavigate();
@@ -43,11 +42,13 @@ const CreatePage = () => {
   };
 
   const handleSubmit = () => {
-    if (title.trim() !== "" && content.trim() !== "") {
-      mutate(userInput);
-    } else {
-      alert("제목과 본문을 입력하세요 !");
-    }
+    // if (title.trim() !== "" && content.trim() !== "") {
+    //   mutate(userInput);
+    // } else {
+    //   alert("제목과 본문을 입력하세요 !");
+    // }
+    mutate(userInput);
+    console.log("클릭");
   };
 
   return (
@@ -82,7 +83,17 @@ const CreatePage = () => {
           </S.Lockbox>
 
           <S.BtnBox>
-            <SubmitButton text="작성" onClick={handleSubmit} />
+            <SubmitButton
+              text="작성"
+              onClick={() =>
+                mutate({
+                  title: userInput.title,
+                  content: userInput.content,
+                  secret: false,
+                  notification: true,
+                })
+              }
+            />
           </S.BtnBox>
         </S.SubmitWrapper>
       </S.Wrapper>

@@ -8,6 +8,7 @@ import {
   MypagePage,
   CreatePage,
   NotFoundPage,
+  EditPage,
 } from "../pages";
 
 const Router = [
@@ -46,6 +47,10 @@ const Router = [
       {
         path: "create",
         element: <CreatePage />,
+      },
+      {
+        path: "edit/:id",
+        element: <EditPage />,
       },
     ],
     errorElement: <NotFoundPage />,

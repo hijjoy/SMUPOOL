@@ -7,17 +7,9 @@ const header = {
   Authorization: `Bearer ${VITE_TOKEN}`,
 };
 
-const postsAxios = axios.create({
-  baseURL: "http://43.202.8.75:8080/api/v1/posts",
-  headers: header,
-  params: {
-    offset: 8,
-  },
-});
-
-const commentAxios = axios.create({
-  baseURL: "http://43.202.8.75:8080/api/v1/reply",
+const axiosInstance = axios.create({
+  baseURL: "http://43.202.8.75:8080",
   headers: header,
 });
 
-export { postsAxios, commentAxios };
+export { axiosInstance };

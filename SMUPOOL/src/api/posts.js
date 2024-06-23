@@ -1,10 +1,11 @@
-import { postsAxios } from "./axios";
+import { axiosInstance } from "./axios";
 
 const getPosts = async (page, search) => {
   try {
-    const res = await postsAxios({
+    const res = await axiosInstance.get("/api/v1/posts", {
       params: {
         page: page,
+        offset: 8,
         search: search,
       },
     });
@@ -16,7 +17,7 @@ const getPosts = async (page, search) => {
 
 const getDetailPost = async (id) => {
   try {
-    const res = await postsAxios(`${id}`);
+    const res = await axiosInstance.get(`/api/v1/posts/${id}`);
     return res.data.result;
   } catch (error) {
     console.log(error);
@@ -24,9 +25,9 @@ const getDetailPost = async (id) => {
 };
 
 const createPost = async (postData) => {
-  console.log(postData);
   try {
-    const res = await postsAxios.post(postData);
+    const res = await axiosInstance.post("/api/v1/posts", postData);
+    console.log(res);
     return res.data.result;
   } catch (error) {
     console.log(res);
@@ -34,15 +35,17 @@ const createPost = async (postData) => {
 };
 
 const delectPost = async (id) => {
-  const res = await postsAxios.delete(`${id}`);
-  console.log(res);
-
-  return res.json();
+  try {
+    const res = await axiosInstance.delete(`/api/v1/posts/${id}`);
+    return res;
+  } catch (error) {
+    console.log(res);
+  }
 };
 
-const updataPost = async (id, edit) => {
-  const res = await postsAxios.patch(`${id}`, edit);
+const updatePost = async (id, editData) => {
+  const res = await axiosInstance.patch(`/api/v1/posts/${id}`, editData);
   console.log(res);
 };
 
-export { getPosts, getDetailPost, createPost, delectPost, updataPost };
+export { getPosts, getDetailPost, createPost, delectPost, updatePost };

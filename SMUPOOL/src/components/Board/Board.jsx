@@ -17,7 +17,7 @@ const Board = () => {
   const debounceSarch = useDebounce(search, 500);
   const nav = useNavigate();
 
-  const { data, isPending, isError, error } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ["posts", currentPage, debounceSarch],
     queryFn: () => getPosts(currentPage, debounceSarch),
     staleTime: 10 * 1000,
@@ -53,14 +53,9 @@ const Board = () => {
     } else {
       content = (
         <S.PostWrapper>
-          {data.map(
-            (
-              e,
-              // reverse 일단 데이터에 따라 이후 수정
-            ) => (
-              <Post post={e} key={e.id} />
-            ),
-          )}
+          {data.map((e) => (
+            <Post post={e} key={e.id} />
+          ))}
         </S.PostWrapper>
       );
     }
