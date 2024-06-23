@@ -9,4 +9,15 @@ const getComments = async (id) => {
   }
 };
 
-export { getComments };
+const postComments = async ({ content, secret, postId, parentId }) => {
+  const res = await axiosInstance.post(`/api/v1/replies`, {
+    content,
+    secret,
+    postId,
+    parentId,
+  });
+  console.log(res);
+  return res;
+};
+
+export { getComments, postComments };
