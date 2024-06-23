@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ModalChat from "../../components/ModalChat";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 const MainPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -25,7 +26,12 @@ const MainPage = () => {
     if (studentId) {
       nav("/board");
     } else {
-      alert("로그인을 먼저 해주세요!");
+      toast.error("로그인을 먼저 해주세요!", {
+        style: {
+          color: "#fff",
+          background: "#e05151",
+        },
+      });
       nav("/login");
     }
   };
