@@ -7,7 +7,7 @@ const header = {
 
 const axiosInstance = axios.create({
   baseURL: "http://43.202.8.75:8080",
-  // headers: header,
+  headers: header,
 });
 
 export { axiosInstance };
