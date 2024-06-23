@@ -32,7 +32,9 @@ export default function SignupPage() {
   const { mutate } = useMutation({
     mutationFn: signup,
     onSuccess: () => {
-      toast.success("회원가입이 완료되었습니다 !");
+      toast.success("회원가입이 완료되었습니다 !", {
+        duration: 1200,
+      });
       navigate("/login");
     },
     onError: (error) => {

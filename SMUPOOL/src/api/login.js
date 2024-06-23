@@ -1,12 +1,4 @@
-import axios from "axios";
 import { axiosInstance } from "./axios";
-
-const apiClient = axios.create({
-  baseURL: "http://43.202.8.75:8080",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
 
 const login = async ({ email, password }) => {
   const { data } = await axiosInstance.post(`/api/v1/users/login`, {
@@ -21,4 +13,23 @@ const logout = async () => {
   return data;
 };
 
-export { login, logout };
+const userPatch = async ({ userId, userData }) => {
+  try {
+    const res = await axiosInstance.patch(`/api/v1/users/${userId}`, userData);
+    console.log(userData);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteUser = async (userId) => {
+  try {
+    const res = await axiosInstance.delete(`/api/v1/users/${userId}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { login, logout, userPatch, deleteUser };

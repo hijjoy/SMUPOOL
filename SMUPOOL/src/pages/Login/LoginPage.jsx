@@ -6,7 +6,6 @@ import { login } from "../../api/login";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { setHeader } from "../../utils/header";
-import { axiosInstance } from "../../api/axios";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -27,9 +26,7 @@ const LoginPage = () => {
       localStorage.setItem("accessToken", data.result.token);
       localStorage.setItem("userId", data.result.userId);
       localStorage.setItem("studentId", studentId);
-      localStorage.setItem("name", data.result.userName);
-      // axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${data.result.token}`;
-
+      localStorage.setItem("name", data.result.userNickname);
       setHeader("Authorization", data.result.token);
 
       navigate("/");

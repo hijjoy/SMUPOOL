@@ -1,4 +1,3 @@
-import axios from "axios";
 import { axiosInstance } from "./axios";
 
 const getPosts = async (page, search) => {
