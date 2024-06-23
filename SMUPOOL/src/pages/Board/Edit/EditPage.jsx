@@ -24,8 +24,6 @@ const EditPage = () => {
     content: "",
     // files: [],
     secret: false,
-    // notification: false,
-    // pwd: "",
   });
 
   const { title, content, secret } = userInput;
@@ -82,7 +80,6 @@ const EditPage = () => {
         title: data.title,
         content: data.content,
         secret: data.secret,
-        // notification: data.notification,
       });
     }
   }, [data]);
@@ -109,20 +106,7 @@ const EditPage = () => {
               ))}
             </S.ImgBox>
           </S.FileWrapper>
-
           <S.SubmitWrapper>
-            <S.Lockbox>
-              <div>
-                <CiLock /> 비밀 문의
-                <input
-                  type="checkbox"
-                  value={secret}
-                  onClick={() => setUserInput((prev) => ({ ...prev, secret: !secret }))}
-                />
-              </div>
-              <S.PwdInput name="pwd" type="password" placeholder="비밀번호 입력" />
-            </S.Lockbox>
-
             <S.BtnBox>
               <SubmitButton text="작성" onClick={handleSubmit} />
             </S.BtnBox>
