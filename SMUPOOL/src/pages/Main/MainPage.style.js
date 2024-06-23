@@ -58,7 +58,7 @@ const TextWrapper = styled.div`
     line-height: 66px;
     letter-spacing: 1.5px;
 
-    @media ${theme.SCREEN_SIZE.TABLET} {
+    @media screen and (max-width: 1140px) {
       display: none;
     }
   }

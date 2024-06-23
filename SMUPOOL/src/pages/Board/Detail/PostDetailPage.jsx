@@ -22,6 +22,7 @@ const PostDetailPage = () => {
   });
 
   let content;
+  const userId = localStorage.getItem("userId");
 
   const { mutate } = useMutation({
     mutationFn: delectPost,
@@ -53,21 +54,25 @@ const PostDetailPage = () => {
         <S.Title>
           <h1>{data.title}</h1>
           <div>
-            <p>작성자 : 202110977 정혜원</p>
+            <p>작성자 : {data.author.name}</p>
             <p>작성 날짜 : {data.createdAt.split("T")[0]}</p>
             <p>조회수: {data.views}</p>
           </div>
         </S.Title>
         <S.ContentWrapper>
           <S.Content>{data.content}</S.Content>
-          <S.BtnBox>
-            <button onClick={() => nav(`/board/edit/${params.id}`)}>수정</button>
-            <button onClick={handleDelete}>삭제</button>
-          </S.BtnBox>
-          <S.BtnBox2>
-            <button>신고</button>
-            <button>목록</button>
-          </S.BtnBox2>
+          {data.author.userId == userId ? (
+            <>
+              <S.BtnBox>
+                <button onClick={() => nav(`/board/edit/${params.id}`)}>수정</button>
+                <button onClick={handleDelete}>삭제</button>
+              </S.BtnBox>
+              <S.BtnBox2>
+                <button>신고</button>
+                <button>목록</button>
+              </S.BtnBox2>
+            </>
+          ) : null}
         </S.ContentWrapper>
         <S.CommentWrapper>
           <Comments />

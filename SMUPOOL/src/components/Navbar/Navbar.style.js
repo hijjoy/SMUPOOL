@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   margin-left: 40px;
 
   h1 {
+    cursor: pointer;
     color: ${theme.COLOR.MAIN};
     font-weight: 700;
     font-size: 20px;

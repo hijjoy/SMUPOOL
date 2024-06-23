@@ -4,7 +4,7 @@ import Lock from "../../../assets/images/Lock.webp";
 import { useNavigate } from "react-router-dom";
 
 const Post = ({ post }) => {
-  const { id, title, createdAt, views, secret, notification } = post;
+  const { id, title, createdAt, views, secret, notification, author } = post;
   const nav = useNavigate();
 
   const handleNav = () => {
@@ -24,7 +24,7 @@ const Post = ({ post }) => {
         {secret ? <img src={Lock} /> : null}
       </S.Title>
       <S.Wrapper>
-        <div>202110977 정혜원</div>
+        <div>{author.name}</div>
         <span>{createdAt.split("T")[0]}</span>
         <p>{views}</p>
       </S.Wrapper>

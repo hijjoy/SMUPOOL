@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <S.Container>
       <S.Wrapper>
-        <h1> SMUPOOL</h1>
+        <h1 onClick={() => nav("/")}>SMUPOOL</h1>
         <span onClick={() => nav(navPath)}>{text}</span>
       </S.Wrapper>
       <S.MypageWrppaer onClick={() => nav(`/my-page/${userId}`)}>

@@ -13,7 +13,7 @@ const Recomments = ({ com }) => {
       <S.ChildrenCommentWrapper>
         <h4>
           <MdOutlineSubdirectoryArrowRight />
-          202110977 정혜원
+          {com?.author.name}
         </h4>
         <span>{com?.content}</span>
         <p>작성 날짜 :{com?.createdAt.split("T")[0]}</p>
