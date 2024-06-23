@@ -22,6 +22,7 @@ const PostDetailPage = () => {
   });
 
   let content;
+  const userId = localStorage.getItem("userId");
 
   const { mutate } = useMutation({
     mutationFn: delectPost,
@@ -60,14 +61,18 @@ const PostDetailPage = () => {
         </S.Title>
         <S.ContentWrapper>
           <S.Content>{data.content}</S.Content>
-          <S.BtnBox>
-            <button onClick={() => nav(`/board/edit/${params.id}`)}>수정</button>
-            <button onClick={handleDelete}>삭제</button>
-          </S.BtnBox>
-          <S.BtnBox2>
-            <button>신고</button>
-            <button>목록</button>
-          </S.BtnBox2>
+          {data.author.userId == userId ? (
+            <>
+              <S.BtnBox>
+                <button onClick={() => nav(`/board/edit/${params.id}`)}>수정</button>
+                <button onClick={handleDelete}>삭제</button>
+              </S.BtnBox>
+              <S.BtnBox2>
+                <button>신고</button>
+                <button>목록</button>
+              </S.BtnBox2>
+            </>
+          ) : null}
         </S.ContentWrapper>
         <S.CommentWrapper>
           <Comments />

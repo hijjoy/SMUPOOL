@@ -6,13 +6,13 @@ import Recomments from "../recomments";
 import { useMutation } from "@tanstack/react-query";
 import { postComments, DeteleComment } from "../../../../api/comments";
 import { useParams } from "react-router-dom";
-import EditPage from "../../../../pages/Board/Edit/EditPage";
 
 const Comment = ({ com, refetch }) => {
   const params = useParams();
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
   const [anonymous, setAnonymous] = useState(false);
+  const userId = localStorage.getItem("userId");
 
   const handleCreate = () => {
     setOpen((prev) => !prev);
@@ -70,7 +70,9 @@ const Comment = ({ com, refetch }) => {
         <S.CommentBtn>
           <button onClick={handleCreate}>댓글쓰기</button>
           <p>작성 날짜 :{com.createdAt.split("T")[0]}</p>
-          <S.Deletebtn onClick={(e) => handleDeleteComment(e, com.id)}>삭제</S.Deletebtn>
+          {com.author.userId == userId ? (
+            <S.Deletebtn onClick={(e) => handleDeleteComment(e, com.id)}>삭제</S.Deletebtn>
+          ) : null}
         </S.CommentBtn>
       </S.CommentBox>
       {com.children?.map((e) => (
