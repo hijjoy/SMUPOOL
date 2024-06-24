@@ -1,0 +1,10 @@
+[build]
+  base = "SMUPOOL"
+  command = "yarn build"
+  publish = "SMUPOOL/dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[functions]
+  directory = "SMUPOOL/netlify/functions"
