@@ -70,7 +70,6 @@ const ModalChat = ({ showModal, setShowModal }) => {
       });
 
       const token = localStorage.getItem("accessToken");
-      console.log(chatMessage);
       stompClient.send(
         "/app/chat.message",
         {
