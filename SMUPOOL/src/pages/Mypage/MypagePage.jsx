@@ -52,6 +52,7 @@ const MypagePage = () => {
         },
       });
       removeHeader("Authorization");
+      queryClient.removeQueries(["profile"]);
       localStorage.clear();
       navigate("/");
     },
