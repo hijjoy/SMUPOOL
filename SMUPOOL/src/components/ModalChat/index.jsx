@@ -6,12 +6,17 @@ import { FaArrowAltCircleUp } from "react-icons/fa";
 import MessageContainer from "../MessageContainer/MessageContainer";
 import { Stomp } from "@stomp/stompjs";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { getProfile } from "../../api/login";
 
 const ModalChat = ({ showModal, setShowModal }) => {
   const [message, setMessage] = useState("");
   const [stompClient, setStompClient] = useState(null);
   const [messageList, setMessageList] = useState([]);
-  console.log(setShowModal);
+  const { data, isPending, isError } = useQuery({
+    queryFn: getProfile,
+    queryKey: ["profile"],
+  });
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -64,7 +69,7 @@ const ModalChat = ({ showModal, setShowModal }) => {
   const sendMessage = () => {
     if (stompClient && message?.trim() !== "") {
       const chatMessage = JSON.stringify({
-        sender: 29,
+        sender: data.id,
         content: message,
         chatroom: 6,
       });
