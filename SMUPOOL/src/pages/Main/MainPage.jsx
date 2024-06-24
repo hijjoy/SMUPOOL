@@ -38,6 +38,20 @@ const MainPage = () => {
     }
   };
 
+  const handleChat = () => {
+    if (!token) {
+      toast.error("상담을 위해 로그인해주세요", {
+        style: {
+          color: "#fff",
+          background: "#e05151",
+        },
+      });
+      nav("/login");
+    } else {
+      setShowModal((prev) => !prev);
+    }
+  };
+
   return (
     <S.Contaienr>
       <motion.div
@@ -49,8 +63,8 @@ const MainPage = () => {
         <S.Profile>
           {token ? (
             <>
-              <img src={Profile} alt="profile" />
-              <span>
+              <img src={Profile} alt="profile" onClick={() => nav(`/my-page/${userId}`)} />
+              <span onClick={() => nav(`/my-page/${userId}`)}>
                 {studentId} {name}님 스뮤풀에 오신 것을 환영합니다!
               </span>
             </>
@@ -82,7 +96,7 @@ const MainPage = () => {
           width="185px"
         />
         <Button
-          onClick={() => setShowModal((prev) => !prev)}
+          onClick={handleChat}
           text="실시간 상담"
           svg={<AiFillMessage color={theme.COLOR.MAIN} />}
           width="185px"

@@ -128,12 +128,20 @@ const Profile = styled.div`
   display: ${(props) => (props.$showModal ? "none" : "")};
 
   img {
+    cursor: pointer;
     width: 35px;
     margin-right: 10px;
     padding-top: 3px;
+    z-index: 9999;
+
+    &:hover {
+      transform: scale(0.98);
+    }
   }
 
   span {
+    cursor: pointer;
+    z-index: 9999;
     ${theme.ALIGN.ROW_CENTER};
     padding: 15px;
     height: 30px;
@@ -143,6 +151,9 @@ const Profile = styled.div`
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     font-weight: 500;
     font-size: 13px;
+    &:hover {
+      transform: scale(0.98);
+    }
   }
 
   a {
